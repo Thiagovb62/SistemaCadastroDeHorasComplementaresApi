@@ -1,0 +1,27 @@
+﻿
+services:
+  HorasApi.app:
+    container_name: HorasApi.app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5004:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  
+  person.db:
+    image: postgres:latest
+    container_name: person.db
+    environment:
+      POSTGRES_URL: ${POSTGRES_URL}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: osbbd
+      PGDATA: /var/lib/postgresql/new-data
+    volumes:
+      - ./new-data:/var/lib/postgresql/new-data
+    ports:
+      - "5432:5432"
+
