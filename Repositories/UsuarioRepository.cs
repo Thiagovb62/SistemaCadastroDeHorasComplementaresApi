@@ -22,7 +22,12 @@ public class UsuarioRepository : IUsuarioRepository
 
     public async Task<Usuario> GetByIdAsync(int id)
     {
-        return await _context.Usuarios.FindAsync(id);
+        Usuario usuario = await _context.Usuarios.FindAsync(id);
+        if (usuario == null)
+        {
+            throw new KeyNotFoundException($"Usuário com ID {id} não encontrado.");
+        }
+        return  usuario;
     }
 
     public async Task<Usuario> AddAsync(Usuario usuario)
@@ -47,5 +52,15 @@ public class UsuarioRepository : IUsuarioRepository
         _context.Usuarios.Remove(usuario);
         await _context.SaveChangesAsync();
         return true;
+    }
+    public async Task<Usuario> GetByMatriculaAsync(string matricula)
+    {
+        if (string.IsNullOrEmpty(matricula))
+        { 
+            throw new ArgumentException("Matricula não pode ser nula ou vazia.", nameof(matricula));
+        }
+        Usuario user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Matricula == matricula);
+        return user;
+        
     }
 }

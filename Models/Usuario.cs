@@ -17,8 +17,7 @@ public class Usuario
 
     [Required(ErrorMessage = "A senha é obrigatória")]
     public string Senha { get; set; }
-
-    [Required(ErrorMessage = "A role é obrigatória")]
+    
     public string Role { get; set; }
 
     [Required(ErrorMessage = "O semestre de ingresso é obrigatório")]

@@ -1,0 +1,16 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+
+namespace SistemaCadastroDeHorasApi.Models.DTO;
+
+public record ReqUserDTO(
+    [Required(ErrorMessage = "O nome é obrigatório")]
+    string Nome,
+    [Required(ErrorMessage = "A matrícula é obrigatória")]
+    string Matricula,
+    [Required(ErrorMessage = "A senha é obrigatória")]
+    string Senha,
+    [Required(ErrorMessage = "O semestre de ingresso é obrigatório")]
+    int SemestreDeIngresso
+   
+);

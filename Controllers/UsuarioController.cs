@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using SistemaCadastroDeHorasApi.Models;
 using SistemaCadastroDeHorasApi.Services;
-using System.Threading.Tasks;
+using SistemaCadastroDeHorasApi.Models.DTO;
 
 namespace SistemaCadastroDeHorasApi.Controllers;
 
@@ -32,7 +31,7 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] Usuario usuario)
+    public async Task<IActionResult> Create([FromBody] ReqUserDTO usuario)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -41,7 +40,7 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] Usuario usuario)
+    public async Task<IActionResult> Update(int id, [FromBody] ReqUpdateUserDTO usuario)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 

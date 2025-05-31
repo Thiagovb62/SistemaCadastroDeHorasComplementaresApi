@@ -41,7 +41,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sistema Cadastro de Horas V1"); });
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sistema Cadastro de Horas V1");
+        c.RoutePrefix = string.Empty; // Ajuste conforme necessário
+    });
     app.ApplyMigrations();
 }
 
