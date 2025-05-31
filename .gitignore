@@ -43,6 +43,7 @@ artifacts/
 *.ilk
 *.idb
 *.tlog
+*.env
 *.log
 *.vspscc
 *.vssscc
