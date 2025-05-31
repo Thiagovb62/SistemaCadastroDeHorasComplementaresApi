@@ -30,3 +30,7 @@ Certifique-se de ter instalado:
    ```bash
    git clone https://github.com/Thiagovb62/SistemaCadastroDeHorasApi.git
    cd SistemaCadastroDeHorasApi
+2. Excute os containers
+   docker-compose up -d --build
+3. Rode as migrations
+   docker run --rm -it -v ${PWD}:/app -w /app mcr.microsoft.com/dotnet/sdk:9.0 bash -c 'dotnet tool install --global dotnet-ef --version 9.0.5 && export PATH=$PATH:/root/.dotnet/tools && dotnet ef migrations add InitialCreate && dotnet ef database update'
