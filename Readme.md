@@ -22,6 +22,8 @@ Certifique-se de ter instalado:
 
 - **Docker** e **Docker Compose**
 - **.NET SDK 9.0**
+- **.RIDER**
+- **.VISUAL STUDIO**
 - **PostgreSQL**
 
 ## Como Executar
@@ -30,7 +32,17 @@ Certifique-se de ter instalado:
    ```bash
    git clone https://github.com/Thiagovb62/SistemaCadastroDeHorasApi.git
    cd SistemaCadastroDeHorasApi
-2. Excute os containers
+
+2. Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis de ambiente:
+   ```env
+   POSTGRES_USER=
+   POSTGRES_PASSWORD=
+   POSTGRES_HOST=
+   POSTGRES_DB=
+   ```
+   Certifique-se de que as credenciais correspondam às usadas no `compose.yaml`.
+
+3. Excute os containers
    docker-compose up -d --build
-3. Rode as migrations
-   docker run --rm -it -v ${PWD}:/app -w /app mcr.microsoft.com/dotnet/sdk:9.0 bash -c 'dotnet tool install --global dotnet-ef --version 9.0.5 && export PATH=$PATH:/root/.dotnet/tools && dotnet ef migrations add InitialCreate && dotnet ef database update'
+
+4. Acesse a API em `http://localhost:5004/index.html`.
