@@ -13,17 +13,6 @@ namespace SistemaCadastroDeHorasApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Atividades",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Atividades", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
                 {
@@ -39,20 +28,11 @@ namespace SistemaCadastroDeHorasApi.Migrations
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Atividades_Id",
-                table: "Atividades",
-                column: "Id",
-                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Atividades");
-
             migrationBuilder.DropTable(
                 name: "Usuarios");
         }
