@@ -3,41 +3,49 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SistemaCadastroDeHorasApi.Context;
 using SistemaCadastroDeHorasApi.Migrations;
+using SistemaCadastroDeHorasApi.Repositories;
+using SistemaCadastroDeHorasApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddOpenApi();
-builder.Services.AddEndpointsApiExplorer(); ;
-builder.Services.AddScoped<DataContext>();
+builder.Services.AddEndpointsApiExplorer();
 
 Env.Load();
-var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
+var host = Environment.GetEnvironmentVariable("POSTGRES_HOST") ?? "localhost";
+var user = Environment.GetEnvironmentVariable("POSTGRES_USER") ?? "postgres";
+var password = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD") ?? "";
+var database = Environment.GetEnvironmentVariable("POSTGRES_DB") ?? "osbbd";
 
-var connectionStringBase = builder.Configuration.GetConnectionString("DefaultConnection");
-var fullConnectionString = $"{connectionStringBase};Password={dbPassword}";
-
+var connectionString = $"Host={host};Port=5432;Database={database};Username={user};Password={password}";
 builder.Services.AddDbContext<DataContext>(options =>
-    options.UseNpgsql(fullConnectionString));
+    options.UseNpgsql(connectionString));
+
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+
+builder.Services.AddControllers();
 
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddSwaggerGen(c =>
     {
         c.SwaggerDoc("v1",
-            new OpenApiInfo { Title = "Todo API", Description = "Keep track of your tasks", Version = "v1" });
+            new OpenApiInfo { Title = "Sistema Cadastro de Horas", Description = "API para cadastro de horas", Version = "v1" });
     });
 }
 
 var app = builder.Build();
 
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Todo API V1"); });
+    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sistema Cadastro de Horas V1"); });
     app.ApplyMigrations();
 }
+
+
+app.MapControllers();
 
 app.Run();
