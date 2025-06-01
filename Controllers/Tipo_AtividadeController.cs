@@ -6,7 +6,7 @@ namespace SistemaCadastroDeHorasApi.Controllers;
 using Services;
 
 [ApiController]
-[Route("api/[controller]/tipo-atividade")]
+[Route("api/[controller]")]
 [Produces("application/json")]
 [Consumes("application/json")]
 public class Tipo_AtividadeController: ControllerBase
