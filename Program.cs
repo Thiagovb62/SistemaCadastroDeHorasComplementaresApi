@@ -24,6 +24,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ITipo_AtividadeService, Tipo_AtividadeService>();
+builder.Services.AddScoped<ITipo_AtividadeRepository, Tipo_AtividadeRepository>();
 
 builder.Services.AddControllers();
 

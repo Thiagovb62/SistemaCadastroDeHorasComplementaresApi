@@ -5,7 +5,7 @@ using SistemaCadastroDeHorasApi.Models.DTO;
 namespace SistemaCadastroDeHorasApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/[controller]/usuarios")]
 public class UsuarioController : ControllerBase
 {
     private readonly IUsuarioService _usuarioService;

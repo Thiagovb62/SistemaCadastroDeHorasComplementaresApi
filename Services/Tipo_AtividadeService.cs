@@ -1,0 +1,61 @@
+﻿using SistemaCadastroDeHorasApi.Models;
+using SistemaCadastroDeHorasApi.Models.DTO;
+using SistemaCadastroDeHorasApi.Models.ENUMS;
+using SistemaCadastroDeHorasApi.Repositories;
+
+namespace SistemaCadastroDeHorasApi.Services;
+
+public class Tipo_AtividadeService : ITipo_AtividadeService
+{
+    private readonly ITipo_AtividadeRepository _tipoAtividadeRepository;
+    
+    public Tipo_AtividadeEnum? ObterTipoAtividadePorNome(string nome)
+    {
+        return Tipo_AtividadeEnumExtensions.FromString(nome);
+    }
+    
+    public string ObterNomeTipoAtividade(int valor)
+    {
+        return Enum.GetName(typeof(Tipo_AtividadeEnum), valor) ?? "Valor inválido";
+    }
+
+    public Tipo_AtividadeService(ITipo_AtividadeRepository tipoAtividadeRepository)
+    {
+        _tipoAtividadeRepository = tipoAtividadeRepository;
+    }
+
+
+    public async Task<IEnumerable<ResTipoAtividadeDTO>> GetAllAsync()
+    {
+        var tiposAtividade = await _tipoAtividadeRepository.GetAllAsync();
+
+        if (tiposAtividade == null || !tiposAtividade.Any())
+        {
+            throw new InvalidOperationException("Nenhum tipo de atividade encontrado.");
+        }
+
+        return tiposAtividade.Select(tipo => new ResTipoAtividadeDTO
+        {
+            Id = tipo.Id,
+            nome = ObterNomeTipoAtividade((int)tipo.nome)
+        });
+    }
+
+    public async Task<Tipo_Atividade> CreateAsync(ReqTipo_AtividadeDTO dto)
+    {
+        if (dto == null)
+        {
+            throw new ArgumentNullException(nameof(dto), "Tipo de atividade não pode ser nulo.");
+        }
+
+        Tipo_AtividadeEnum tipoAtividadeEnum = ObterTipoAtividadePorNome(dto.nome)
+            ?? throw new ArgumentException($"Tipo de atividade '{dto.nome}' não é válido.", nameof(dto.nome));
+        
+        var tipoAtividade = new Tipo_Atividade
+        {
+            nome = tipoAtividadeEnum,
+        };
+
+        return await _tipoAtividadeRepository.CreateAsync(tipoAtividade);
+    }
+}

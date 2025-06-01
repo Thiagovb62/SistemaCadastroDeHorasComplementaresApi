@@ -9,17 +9,17 @@ public class Usuario
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Auto-incremento
     public int Id { get; set; }
 
-    [Required(ErrorMessage = "O nome é obrigatório")]
+    [Required]
     public string Nome { get; set; }
 
-    [Required(ErrorMessage = "A matrícula é obrigatória")]
+    [Required]
     public string Matricula { get; set; }
 
-    [Required(ErrorMessage = "A senha é obrigatória")]
+    [Required]
     public string Senha { get; set; }
     
     public string Role { get; set; }
 
-    [Required(ErrorMessage = "O semestre de ingresso é obrigatório")]
+    [Required]
     public int SemestreDeIngresso { get; set; }
 }
