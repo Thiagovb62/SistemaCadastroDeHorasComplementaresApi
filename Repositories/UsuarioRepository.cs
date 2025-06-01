@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaCadastroDeHorasApi.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using SistemaCadastroDeHorasApi.Context;
 
 namespace SistemaCadastroDeHorasApi.Repositories;

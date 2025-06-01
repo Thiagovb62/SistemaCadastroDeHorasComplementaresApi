@@ -7,6 +7,7 @@ namespace SistemaCadastroDeHorasApi.Context;
 public class DataContext : DbContext
 {
     public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Tipo_Atividade> TiposAtividade { get; set; }
 
     public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
