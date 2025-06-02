@@ -23,8 +23,28 @@ public class Tipo_AtividadeService : ITipo_AtividadeService
     {
         _tipoAtividadeRepository = tipoAtividadeRepository;
     }
+    
+    public async Task<ResTipoAtividadeDTO> GetByNomeAsync(string nome)
+    {
+        if (string.IsNullOrEmpty(nome))
+        {
+            throw new ArgumentException("Nome do tipo de atividade não pode ser nulo ou vazio.", nameof(nome));
+        }
 
+        var tipoAtividade = await _tipoAtividadeRepository.GetByNomeAsync(nome);
 
+        if (tipoAtividade == null)
+        {
+            throw new KeyNotFoundException($"Tipo de atividade '{nome}' não encontrado.");
+        }
+
+        return new ResTipoAtividadeDTO
+        {
+            Id = tipoAtividade.Id,
+            nome = ObterNomeTipoAtividade((int)tipoAtividade.nome)
+        };
+    }
+    
     public async Task<IEnumerable<ResTipoAtividadeDTO>> GetAllAsync()
     {
         var tiposAtividade = await _tipoAtividadeRepository.GetAllAsync();
