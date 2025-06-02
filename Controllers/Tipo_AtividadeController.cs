@@ -22,6 +22,13 @@ public class Tipo_AtividadeController: ControllerBase
         var tiposAtividade = await _tipoAtividadeService.GetAllAsync();
         return Ok(tiposAtividade);
     }
+    [HttpGet]
+    [Route("nome")]
+    public async Task<IActionResult> GetByNome([FromQuery] string nome)
+    {
+        var tipoAtividade = await _tipoAtividadeService.GetByNomeAsync(nome);
+        return Ok(tipoAtividade);
+    }
     
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] ReqTipo_AtividadeDTO dto)
