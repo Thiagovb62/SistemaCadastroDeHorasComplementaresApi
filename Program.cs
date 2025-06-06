@@ -26,6 +26,8 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ITipo_AtividadeService, Tipo_AtividadeService>();
 builder.Services.AddScoped<ITipo_AtividadeRepository, Tipo_AtividadeRepository>();
+builder.Services.AddScoped<ITipo_ParticipacaoService, Tipo_ParticipacaoService>();
+builder.Services.AddScoped<ITipo_ParticipacaoRepository, Tipo_ParticipacaoRepository>();
 
 builder.Services.AddControllers();
 
