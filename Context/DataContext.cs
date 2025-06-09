@@ -9,6 +9,7 @@ public class DataContext : DbContext
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Tipo_Atividade> TiposAtividade { get; set; }
     public DbSet<Tipo_Participacao> TiposParticipacao { get; set; }
+    public DbSet<Atividades> Atividades { get; set; }
 
     public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
