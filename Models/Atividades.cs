@@ -9,7 +9,6 @@ namespace SistemaCadastroDeHorasApi.Models;
 public class Atividades
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public Guid Id { get; set; }
 
     [Required]
