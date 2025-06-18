@@ -39,7 +39,10 @@ public class UsuarioService : IUsuarioService
 
     public async Task<Usuario> CreateAsync(ReqUserDTO usuario)
     {
-        if (await _usuarioRepository.GetByMatriculaAsync(usuario.Matricula) != null)
+        
+        var existingUsuario = await _usuarioRepository.GetByMatriculaAsync(usuario.Matricula);
+        
+        if (existingUsuario != null)
         {
             throw new BadHttpRequestException("Usuário já existe com esta matrícula.");
         }
