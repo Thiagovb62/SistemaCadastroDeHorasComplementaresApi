@@ -60,22 +60,22 @@ public class Tipo_ParticipacaoService : ITipo_ParticipacaoService
         });
     }
 
-    //public async Task<Tipo_Participacao> CreateAsync(ReqTipoParticipacaoDTO dto)
-    //{
-    //    if (dto == null)
-    //    {
-    //        throw new ArgumentException(nameof(dto), "Tipo de participação não pode ser nulo.");
-    //    }
+    public Task<ResTipoParticipacaoDTO> getByIdAsync(int id)
+    {
+        var tipoParticipacao = _tipoParticipacaoRepository.getByIdAsync(id)
+            .Result;
 
-    //    Tipo_ParticipacaoEnum tipoParticipacaoEnum = ObterTipoParticipacaoPorNome(dto.nome)
-    //        ?? throw new ArgumentException($"Tipo de participação '{dto.nome}' não é válido.", nameof(dto.nome));
+        if (tipoParticipacao == null)
+        {
+            throw new KeyNotFoundException($"Tipo de participação com ID {id} não encontrado.");
+        }
 
-    //    var tipoParticipacao = new Tipo_Participacao
-    //    {
-    //        nome = tipoParticipacaoEnum,
-    //    };
-
-    //    return await _tipoParticipacaoRepository.CreateAsync(tipoParticipacao);
-    //}
+        return Task.FromResult(new ResTipoParticipacaoDTO
+        {
+            Id = tipoParticipacao.Id,
+            nome = ObterNomeTipoParticipacao((int)tipoParticipacao.nome)
+        });
+    }
+    
 }
 

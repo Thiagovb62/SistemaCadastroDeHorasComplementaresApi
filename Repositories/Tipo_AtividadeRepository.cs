@@ -1,8 +1,9 @@
-﻿using SistemaCadastroDeHorasApi.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaCadastroDeHorasApi.Context;
 using SistemaCadastroDeHorasApi.Models;
 using SistemaCadastroDeHorasApi.Models.ENUMS;
 
-namespace SistemaCadastroDeHorasApi.Repositories;
+namespace SistemaCadastroDeHorasApi.Repositories.Contracts;
 
 public class Tipo_AtividadeRepository : ITipo_AtividadeRepository
 
@@ -50,5 +51,14 @@ public class Tipo_AtividadeRepository : ITipo_AtividadeRepository
         await _context.SaveChangesAsync();
         return tipoAtividade;
     }
-    
+
+    public Task<Tipo_Atividade> GetByIdAsync(int id)
+    {
+        var tipoAtividade = _context.TiposAtividade.FirstOrDefaultAsync(t => t.Id == id).Result;
+        if (tipoAtividade == null)
+        {
+            throw new KeyNotFoundException($"Tipo de atividade com ID {id} não encontrado.");
+        }
+        return Task.FromResult(tipoAtividade);
+    }
 }
