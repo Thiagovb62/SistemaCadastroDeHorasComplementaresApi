@@ -29,7 +29,7 @@ public class Atividades
 
     [Required] [StringLength(100)] public string nomeInstituicao { get; set; }
 
-    [StringLength(100)] public string cnpj { get; set; }
+    [StringLength(100)] public string? cnpj { get; set; }
 
     [Required] public DateTime dataInicio { get; set; }
 

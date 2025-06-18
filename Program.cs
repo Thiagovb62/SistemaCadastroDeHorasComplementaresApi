@@ -23,13 +23,18 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(connectionString));
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<Tipo_AtividadeRepository>();
+builder.Services.AddScoped<Tipo_ParticipacaoRepository>();
 builder.Services.AddScoped<ITipo_AtividadeService, Tipo_AtividadeService>();
 builder.Services.AddScoped<ITipo_AtividadeRepository, Tipo_AtividadeRepository>();
 builder.Services.AddScoped<ITipo_ParticipacaoService, Tipo_ParticipacaoService>();
 builder.Services.AddScoped<ITipo_ParticipacaoRepository, Tipo_ParticipacaoRepository>();
 builder.Services.AddScoped<IAtividadesRepository, AtividadesRepository>();
 builder.Services.AddScoped<IAtividadesService, AtividadesService>();
+builder.Services.AddScoped<IAtividadeUsuarioRepository, AtividadeUsuarioRepository>();
+builder.Services.AddScoped<IAtividadeUsuarioService, AtividadeUsuarioService>();
 
 builder.Services.AddControllers();
 
@@ -52,7 +57,7 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sistema Cadastro de Horas V1");
         c.RoutePrefix = string.Empty; // Ajuste conforme necessário
     });
-    //app.ApplyMigrations();
+    app.ApplyMigrations();
 }
 
 

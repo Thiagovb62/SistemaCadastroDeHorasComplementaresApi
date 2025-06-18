@@ -42,4 +42,15 @@ public class Tipo_AtividadeController: ControllerBase
         return CreatedAtAction(nameof(GetAll), new { id = createdTipoAtividade.Id }, createdTipoAtividade);
     }
     
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var tipoAtividade = await _tipoAtividadeService.GetByIdAsync(id);
+        if (tipoAtividade == null)
+        {
+            return NotFound($"Tipo de atividade com ID {id} não encontrado.");
+        }
+        return Ok(tipoAtividade);
+    }
+    
 }

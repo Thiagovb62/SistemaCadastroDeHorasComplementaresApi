@@ -1,4 +1,5 @@
-﻿using SistemaCadastroDeHorasApi.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaCadastroDeHorasApi.Context;
 using SistemaCadastroDeHorasApi.Models;
 using SistemaCadastroDeHorasApi.Models.ENUMS;
 
@@ -37,17 +38,16 @@ public class Tipo_ParticipacaoRepository : ITipo_ParticipacaoRepository
         return Task.FromResult(tipoParticipacao);
     }
 
-    //public async Task<Tipo_Participacao> CreateAsync(Tipo_Participacao tipoParticipacao)
-    //{
-    //    if (tipoParticipacao == null)
-    //    {
-    //        throw new ArgumentNullException(nameof(Tipo_Participacao), "O tipo de participação não pode ser nulo.");
-    //    }
-
-    //    _context.TiposParticipacao.Add(tipoParticipacao);
-    //    await _context.SaveChangesAsync();
-    //    return tipoParticipacao;
-    //}
+    public Task<Tipo_Participacao> getByIdAsync(int id)
+    {
+        var tipoParticipacao = _context.TiposParticipacao.FirstOrDefaultAsync(t => t.Id == id).Result;
+        if (tipoParticipacao == null)
+        {
+            throw new KeyNotFoundException($"Tipo de participação com ID {id} não encontrado.");
+        }
+        return Task.FromResult(tipoParticipacao);
+    }
+    
 }
 
 

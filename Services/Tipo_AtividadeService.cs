@@ -60,6 +60,11 @@ public class Tipo_AtividadeService : ITipo_AtividadeService
             nome = ObterNomeTipoAtividade((int)tipo.nome)
         });
     }
+    
+    
+    
+    
+    
 
     public async Task<Tipo_Atividade> CreateAsync(ReqTipo_AtividadeDTO dto)
     {
@@ -77,5 +82,23 @@ public class Tipo_AtividadeService : ITipo_AtividadeService
         };
 
         return await _tipoAtividadeRepository.CreateAsync(tipoAtividade);
+    }
+
+    public Task<ResTipoAtividadeDTO> GetByIdAsync(int id)
+    {
+
+        var tipoAtividade = _tipoAtividadeRepository.GetByIdAsync(id)
+            .Result;
+
+        if (tipoAtividade == null)
+        {
+            throw new KeyNotFoundException($"Tipo de atividade com ID {id} não encontrado.");
+        }
+
+        return Task.FromResult(new ResTipoAtividadeDTO
+        {
+            Id = tipoAtividade.Id,
+            nome = ObterNomeTipoAtividade((int)tipoAtividade.nome)
+        });
     }
 }

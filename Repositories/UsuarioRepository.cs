@@ -57,7 +57,8 @@ public class UsuarioRepository : IUsuarioRepository
         { 
             throw new ArgumentException("Matricula não pode ser nula ou vazia.", nameof(matricula));
         }
-        Usuario user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Matricula == matricula);
+        Usuario? user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Matricula == matricula);
+        
         return user;
         
     }

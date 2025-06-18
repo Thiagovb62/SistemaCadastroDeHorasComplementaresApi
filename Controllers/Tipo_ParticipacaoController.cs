@@ -31,17 +31,18 @@ public class Tipo_ParticipacaoController : ControllerBase
         var tipoParticipacao = await _tipoParticipacaoService.GetByNomeAsync(nome);
         return Ok(tipoParticipacao);
     }
+    
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var tipoParticipacao = await _tipoParticipacaoService.getByIdAsync(id);
+        if (tipoParticipacao == null)
+        {
+            return NotFound($"Tipo de participação com ID {id} não encontrado.");
+        }
+        return Ok(tipoParticipacao);
+    }
 
-    //[HttpPost]
-    //public async Task<IActionResult> Create([FromBody] ReqTipoParticipacaoDTO dto)
-    //{
-    //    if (dto == null)
-    //    {
-    //        return BadRequest("Tipo de participao nao pode ser nulo.");
-    //    }
-
-    //    var createdTipoParticipacao = await _tipoParticipacaoService.CreateAsync(dto);
-    //    return CreatedAtAction(nameof(GetAll), new { id = createdTipoParticipacao.Id }, createdTipoParticipacao);
-    //}
+ 
 }
 
