@@ -11,9 +11,9 @@ public record ReqAtividadeUsuarioDTO(
     DateTime DataInicio,
     [Required,DataType(DataType.Date)]
     DateTime DataFim,
-    [Required, Range(1, int.MaxValue)]
+    [Required, Range(1, 15)]
     int TipoAtividadeId,
-    [Required, Range(1, int.MaxValue)]
+    [Required, Range(1, 2)]
     int TipoParticipacaoId,
     [Required, StringLength(100, MinimumLength = 3)]
     string pais,

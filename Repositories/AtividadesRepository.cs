@@ -13,37 +13,17 @@ public class AtividadesRepository : IAtividadesRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Atividades>> GetAllAsync()
+    public async Task<IEnumerable<Atividades>> GetByUserIdAsync(int id)
     {
         return await _context.Atividades
-            .Include(a => a.TipoAtividade)
-            .Include(a => a.TipoParticipacao)
+            .Where(a => a.UsuarioId == id)
             .ToListAsync();
     }
-
-    public async Task<Atividades> GetByIdAsync(Guid id)
-    {
-        return await _context.Atividades
-            .Include(a => a.TipoAtividade)
-            .Include(a => a.TipoParticipacao)
-            .FirstOrDefaultAsync(a => a.Id == id);
-    }
-
-    public async Task AddAsync(Atividades atividade)
-    {
-        await _context.Atividades.AddAsync(atividade);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task UpdateAsync(Atividades atividade)
-    {
-        _context.Atividades.Update(atividade);
-        await _context.SaveChangesAsync();
-    }
-
+    
     public async Task DeleteAsync(Guid id)
     {
-        var atividade = await GetByIdAsync(id);
+        var atividade = await _context.Atividades
+            .FirstOrDefaultAsync(a => a.Id == id);
         if (atividade != null)
         {
             _context.Atividades.Remove(atividade);

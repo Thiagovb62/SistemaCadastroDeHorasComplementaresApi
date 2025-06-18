@@ -16,6 +16,12 @@ public class Atividades
     public int TipoAtividadeId { get; set; }
 
     [Required] public Tipo_Atividade TipoAtividade { get; set; }
+    
+    [Required]
+    [ForeignKey(nameof(Usuario))]
+    public int UsuarioId { get; set; }
+    
+    [Required] public Usuario usuario { get; set; }
 
     [Required]
     [ForeignKey("TipoParticipacaoId")]

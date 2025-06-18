@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SistemaCadastroDeHorasApi.Context;
@@ -11,9 +12,11 @@ using SistemaCadastroDeHorasApi.Context;
 namespace SistemaCadastroDeHorasApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250618170915_updating_table_atividades_add_user_references")]
+    partial class updating_table_atividades_add_user_references
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +46,7 @@ namespace SistemaCadastroDeHorasApi.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("AtividadeUsuarios", (string)null);
+                    b.ToTable("AtividadeUsuarios");
                 });
 
             modelBuilder.Entity("SistemaCadastroDeHorasApi.Models.Atividades", b =>
@@ -103,7 +106,7 @@ namespace SistemaCadastroDeHorasApi.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Atividades", (string)null);
+                    b.ToTable("Atividades");
                 });
 
             modelBuilder.Entity("SistemaCadastroDeHorasApi.Models.Tipo_Atividade", b =>
@@ -119,7 +122,7 @@ namespace SistemaCadastroDeHorasApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tipo_Atividade", (string)null);
+                    b.ToTable("Tipo_Atividade");
                 });
 
             modelBuilder.Entity("SistemaCadastroDeHorasApi.Models.Tipo_Participacao", b =>
@@ -135,7 +138,7 @@ namespace SistemaCadastroDeHorasApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tipo_Participacao", (string)null);
+                    b.ToTable("Tipo_Participacao");
 
                     b.HasData(
                         new
@@ -179,7 +182,7 @@ namespace SistemaCadastroDeHorasApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios", (string)null);
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("SistemaCadastroDeHorasApi.Models.AtividadeUsuario", b =>

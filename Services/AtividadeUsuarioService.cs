@@ -1,5 +1,6 @@
 ﻿using SistemaCadastroDeHorasApi.Models;
 using SistemaCadastroDeHorasApi.Models.DTO;
+using SistemaCadastroDeHorasApi.Repositories;
 using SistemaCadastroDeHorasApi.Repositories.Contracts;
 using SistemaCadastroDeHorasApi.Services.Contracts;
 
@@ -9,9 +10,13 @@ public class AtividadeUsuarioService: IAtividadeUsuarioService
 {
     
     private readonly IAtividadeUsuarioRepository _atividadeUsuarioRepositoryRepository;
-    public AtividadeUsuarioService(IAtividadeUsuarioRepository atividadeUsuarioRepositoryRepository)
+    private readonly IAtividadesRepository _atividadesRepository;
+    private readonly IUsuarioRepository _usuarioRepository;
+    public AtividadeUsuarioService(IAtividadeUsuarioRepository atividadeUsuarioRepositoryRepository, IAtividadesRepository atividadesRepository, IUsuarioRepository usuarioRepository)
     {
         _atividadeUsuarioRepositoryRepository = atividadeUsuarioRepositoryRepository;
+        _atividadesRepository = atividadesRepository;
+        _usuarioRepository = usuarioRepository;
     }
     public Task<IEnumerable<ResAtividadeUsario>> GetAllAsync()
     {
@@ -22,21 +27,23 @@ public class AtividadeUsuarioService: IAtividadeUsuarioService
         )));
     }
 
-    public Task<IEnumerable<ResAtividadeUsario>> GetByUserIdAsync(int id)
+    public Task<IEnumerable<ResAtividadeUsario>> GetAllByUserIdAsync(int id)
     {
-        IEnumerable<AtividadeUsuario> atividades = _atividadeUsuarioRepositoryRepository.GetByUsuarioIdAsync(id).Result;
+        var atividades =  _atividadesRepository.GetByUserIdAsync(id).Result;
+        var user =  _usuarioRepository.GetByIdAsync(id).Result;
         
-        return new Task<IEnumerable<ResAtividadeUsario>>(() => atividades.Select(a => new ResAtividadeUsario(
+        return Task.FromResult(atividades.Select(a => new ResAtividadeUsario(
             a.Id,
-            a.Usuario,
-            a.Atividade
+            user,
+            a
         )));
+            
     }
 
-    public Task AddAsync(Atividades atividade, int usuarioId)
+    public async Task AddAsync(Atividades atividade, int usuarioId)
     {
-
-        return _atividadeUsuarioRepositoryRepository.AddAsync(atividade, usuarioId);
+        
+        await _atividadeUsuarioRepositoryRepository.AddAsync(atividade,usuarioId);
          
     }
 

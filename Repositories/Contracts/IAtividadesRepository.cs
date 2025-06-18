@@ -6,9 +6,7 @@ namespace SistemaCadastroDeHorasApi.Repositories;
 
 public interface IAtividadesRepository
 {
-    Task<IEnumerable<Atividades>> GetAllAsync();
-    Task<Atividades> GetByIdAsync(Guid id);
-    Task AddAsync(Atividades atividade);
-    Task UpdateAsync(Atividades atividade);
+    
+    Task<IEnumerable<Atividades>> GetByUserIdAsync(int id);
     Task DeleteAsync(Guid id);
 }
