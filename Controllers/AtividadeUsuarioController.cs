@@ -28,10 +28,11 @@ public class AtividadeUsuarioController: ControllerBase
         var atividadesUsuarios = await _atividadeUsuarioService.GetAllByUserIdAsync(userId);
         return Ok(atividadesUsuarios);
     }
-    
+
 
     [HttpPost("add/{usuarioId}")]
-    public async Task<IActionResult> Add([FromBody] ReqAtividadeUsuarioDTO dto, [FromRoute] int usuarioId)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Add([FromForm] ReqAtividadeUsuarioDTO dto, [FromRoute] int usuarioId)
     {
         var atividade = new Atividades
         {
@@ -49,10 +50,10 @@ public class AtividadeUsuarioController: ControllerBase
             qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
             cnpj = dto.cnpj
         };
-        
-        await _atividadeUsuarioService.AddAsync(atividade, usuarioId);
+
+        await _atividadeUsuarioService.AddAsync(atividade, usuarioId, dto.comprovante);
         return Ok("Atividade adicionada com sucesso");
-}
+    }
 
     
     
