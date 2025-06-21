@@ -10,12 +10,12 @@ namespace SistemaCadastroDeHorasApi.Controllers;
 [Microsoft.AspNetCore.Components.Route("api/[controller]")]
 [Produces("application/json")]
 [Consumes("application/json")]
-public class AtividadeUsuarioController: ControllerBase
+public class AtividadeUsuarioController : ControllerBase
 {
-    
+
     private readonly IAtividadeUsuarioService _atividadeUsuarioService;
-   
-    
+
+
 
     public AtividadeUsuarioController(IAtividadeUsuarioService atividadeUsuarioService)
     {
@@ -55,6 +55,5 @@ public class AtividadeUsuarioController: ControllerBase
         return Ok("Atividade adicionada com sucesso");
     }
 
-    
     
 }

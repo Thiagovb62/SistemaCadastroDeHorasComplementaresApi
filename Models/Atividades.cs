@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 
 namespace SistemaCadastroDeHorasApi.Models;
@@ -47,7 +48,7 @@ public class Atividades
 
     [Required] public int qtdHorasUtilizadas { get; set; }
 
-    [Required][Column(TypeName = "bytea")] public byte[] comprovante { get; set; }
+    [Required][Column(TypeName = "bytea")][JsonIgnore] public byte[] comprovante { get; set; }
 
     [Required][StringLength(100)] public string nomeArquivo { get; set; }
 
