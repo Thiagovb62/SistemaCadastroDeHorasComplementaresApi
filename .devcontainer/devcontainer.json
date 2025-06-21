@@ -1,0 +1,10 @@
+{
+  "name": "Universal Dev Container with .NET 9",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "postCreateCommand": "bash .devcontainer/install-sotnet9.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-dotnettools.csharp"]
+    }
+  }
+}

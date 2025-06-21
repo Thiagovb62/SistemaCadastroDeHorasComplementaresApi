@@ -34,6 +34,7 @@ builder.Services.AddScoped<ITipo_ParticipacaoRepository, Tipo_ParticipacaoReposi
 builder.Services.AddScoped<IAtividadesRepository, AtividadesRepository>();
 builder.Services.AddScoped<IAtividadeUsuarioRepository, AtividadeUsuarioRepository>();
 builder.Services.AddScoped<IAtividadeUsuarioService, AtividadeUsuarioService>();
+builder.Services.AddScoped<IComprovanteService, ComprovanteService>();
 
 builder.Services.AddControllers();
 

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 
 namespace SistemaCadastroDeHorasApi.Models;
@@ -16,11 +17,11 @@ public class Atividades
     public int TipoAtividadeId { get; set; }
 
     [Required] public Tipo_Atividade TipoAtividade { get; set; }
-    
+
     [Required]
     [ForeignKey(nameof(Usuario))]
     public int UsuarioId { get; set; }
-    
+
     [Required] public Usuario usuario { get; set; }
 
     [Required]
@@ -29,11 +30,11 @@ public class Atividades
 
     [Required] public Tipo_Participacao TipoParticipacao { get; set; }
 
-    [Required] [StringLength(100)] public string pais { get; set; }
+    [Required][StringLength(100)] public string pais { get; set; }
 
-    [Required] [StringLength(100)] public string titulo { get; set; }
+    [Required][StringLength(100)] public string titulo { get; set; }
 
-    [Required] [StringLength(100)] public string nomeInstituicao { get; set; }
+    [Required][StringLength(100)] public string nomeInstituicao { get; set; }
 
     [StringLength(100)] public string? cnpj { get; set; }
 
@@ -46,4 +47,10 @@ public class Atividades
     [Required] public int cargaHoraria { get; set; }
 
     [Required] public int qtdHorasUtilizadas { get; set; }
+
+    [Required][Column(TypeName = "bytea")][JsonIgnore] public byte[] comprovante { get; set; }
+
+    [Required][StringLength(100)] public string nomeArquivo { get; set; }
+
+    [Required][StringLength(50)] public string tipoArquivo { get; set; }
 }
