@@ -27,7 +27,8 @@ public record ReqAtividadeUsuarioDTO(
     int cargaHoraria,
     [Required, Range(0, int.MaxValue)]
     int qtdHorasUtilizadas,
+    [Required]
+    IFormFile comprovante,
     
     string? cnpj = null
-    
 ){}
