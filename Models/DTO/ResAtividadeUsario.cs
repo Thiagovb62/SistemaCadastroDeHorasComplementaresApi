@@ -3,9 +3,8 @@
 
 
 public record ResAtividadeUsario(
-    Guid Id,
-    Usuario usuario,
-    Atividades atividade,
+    ResUserDTO Usuario,
+    ResAtividadeDTO Atividade,
     string nomeArquivo,
     string tipoArquivo
 );

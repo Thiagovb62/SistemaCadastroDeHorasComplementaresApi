@@ -30,17 +30,6 @@ public class Tipo_AtividadeController: ControllerBase
         return Ok(tipoAtividade);
     }
     
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] ReqTipo_AtividadeDTO dto)
-    {
-        if (dto == null)
-        {
-            return BadRequest("Tipo de atividade não pode ser nulo.");
-        }
-
-        var createdTipoAtividade = await _tipoAtividadeService.CreateAsync(dto);
-        return CreatedAtAction(nameof(GetAll), new { id = createdTipoAtividade.Id }, createdTipoAtividade);
-    }
     
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
