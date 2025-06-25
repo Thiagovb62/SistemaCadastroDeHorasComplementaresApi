@@ -40,7 +40,7 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] ReqUpdateUserDTO usuario)
+    public async Task<IActionResult> Update([FromRoute]int id, [FromBody] ReqUpdateUserDTO usuario)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -50,8 +50,8 @@ public class UsuarioController : ControllerBase
         return Ok(updatedUsuario);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int matricula)
+    [HttpDelete("{matricula}")]
+    public async Task<IActionResult> Delete([FromRoute] int matricula)
     {
         var deleted = await _usuarioService.DeleteAsync(matricula);
         if (!deleted) return NotFound("Usuário não encontrado.");
