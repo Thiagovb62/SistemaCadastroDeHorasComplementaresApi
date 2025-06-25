@@ -52,6 +52,10 @@ public class AtividadesRepository : IAtividadesRepository
             _context.Atividades.Remove(atividade);
             await _context.SaveChangesAsync();
         }
+        else
+        {
+            throw new KeyNotFoundException($"Atividade com ID {id} não encontrada.");
+        }
     }
 
     public async Task<ResComprovanteDTO> GetComprovanteAsync(Guid id)

@@ -11,5 +11,5 @@ public interface IUsuarioService
     Task<Usuario> GetByMatriculaAsync(int matricula);
     Task<Usuario> CreateAsync(ReqUserDTO usuario);
     Task<Usuario> UpdateAsync(int id, ReqUpdateUserDTO usuario);
-    Task<bool> DeleteAsync(int id);
+    Task<bool> DeleteAsync(int matricula);
 }

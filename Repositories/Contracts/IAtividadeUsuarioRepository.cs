@@ -8,5 +8,4 @@ public interface IAtividadeUsuarioRepository
     Task<IEnumerable<AtividadeUsuario>> GetAllByUserMatriculaAsync(int usuarioId);
     Task AddAsync(Atividades atividades, int usuarioId);
     Task UpdateAsync(AtividadeUsuario atividadeUsuario);
-    Task DeleteAsync(int id);
 }

@@ -3,6 +3,7 @@ using SistemaCadastroDeHorasApi.Repositories;
 using System.Security.Cryptography;
 using System.Text;
 using SistemaCadastroDeHorasApi.Models.DTO;
+using SistemaCadastroDeHorasApi.Services.Contracts;
 
 
 namespace SistemaCadastroDeHorasApi.Services;
@@ -10,6 +11,7 @@ namespace SistemaCadastroDeHorasApi.Services;
 public class UsuarioService : IUsuarioService
 {
     private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IAtividadeUsuarioService _atividadeUsuarioService;
 
     public string HashPassword(string password)
     {
@@ -20,8 +22,9 @@ public class UsuarioService : IUsuarioService
         }
     }
 
-    public UsuarioService(IUsuarioRepository usuarioRepository)
+    public UsuarioService(IUsuarioRepository usuarioRepository , IAtividadeUsuarioService atividadeUsuarioService)
     {
+        _atividadeUsuarioService = atividadeUsuarioService;
         _usuarioRepository = usuarioRepository;
     }
 
@@ -71,10 +74,19 @@ public class UsuarioService : IUsuarioService
         return await _usuarioRepository.UpdateAsync(existingUsuario);
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int Matricula)
     {
-        var existingUsuario = await _usuarioRepository.GetByIdAsync(id);
+        var existingUsuario = await _usuarioRepository.GetByMatriculaAsync(Matricula);
         if (existingUsuario == null) throw new BadHttpRequestException("Usuário não encontrado.");
-        return await _usuarioRepository.DeleteAsync(id);
+        
+        var existingAtividadeUsuarios = await _atividadeUsuarioService.GetAllByUserMatriculaAsync(existingUsuario.Matricula);
+        
+        if (existingAtividadeUsuarios.Any())
+        {
+            throw new BadHttpRequestException("Usuário não pode ser excluído, pois possui atividades associadas.");
+        }
+        
+        return await _usuarioRepository.DeleteAsync(existingUsuario.Id);
     }
+   
 }

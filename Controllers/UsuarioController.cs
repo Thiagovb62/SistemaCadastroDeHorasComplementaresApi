@@ -51,10 +51,10 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(int matricula)
     {
-        var deleted = await _usuarioService.DeleteAsync(id);
-        if (!deleted) return NotFound();
+        var deleted = await _usuarioService.DeleteAsync(matricula);
+        if (!deleted) return NotFound("Usuário não encontrado.");
 
         return NoContent();
     }

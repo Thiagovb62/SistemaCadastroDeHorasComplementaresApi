@@ -57,6 +57,13 @@ public class AtividadeUsuarioController : ControllerBase
         await _atividadeUsuarioService.AddAsync(atividade, matricula, dto.comprovante);
         return Ok("Atividade adicionada com sucesso");
     }
+    
+    [HttpDelete("delete/atividade/{id}")]
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
+    {
+        await _atividadeUsuarioService.DeleteByAtividadeIdAsync(id);
+        return Ok("Atividade deletada com sucesso");
+    }
 
     
 }

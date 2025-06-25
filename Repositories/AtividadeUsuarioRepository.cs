@@ -12,10 +12,12 @@ public class AtividadeUsuarioRepository : IAtividadeUsuarioRepository
     
     private readonly DataContext _context;
     private readonly UsuarioRepository _usuarioRepository;
+    private readonly IAtividadesRepository _atividadesRepository;
     
-    public AtividadeUsuarioRepository(DataContext context, UsuarioRepository usuarioRepository)
+    public AtividadeUsuarioRepository(DataContext context, UsuarioRepository usuarioRepository, IAtividadesRepository atividadesRepository)
     {
         _context = context;
+        _atividadesRepository = atividadesRepository;
         _usuarioRepository = usuarioRepository;
     }
     
@@ -86,13 +88,9 @@ public class AtividadeUsuarioRepository : IAtividadeUsuarioRepository
         return Task.CompletedTask;
         
     }
+    
 
     public Task UpdateAsync(AtividadeUsuario atividadeUsuario)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteAsync(int id)
     {
         throw new NotImplementedException();
     }

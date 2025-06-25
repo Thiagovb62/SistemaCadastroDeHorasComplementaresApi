@@ -64,8 +64,8 @@ public class AtividadeUsuarioService: IAtividadeUsuarioService
          
     }
 
-    public Task DeleteAsync(int id)
+    public Task DeleteByAtividadeIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return _atividadesRepository.DeleteAsync(id);
     }
 }

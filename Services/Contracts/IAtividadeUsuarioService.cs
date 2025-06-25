@@ -8,5 +8,5 @@ public interface IAtividadeUsuarioService
 
     Task<IEnumerable<ResAtividadeUsario>> GetAllByUserMatriculaAsync(int matriucla);
     Task AddAsync(Atividades atividade, int matricula, IFormFile comprovante);
-    Task DeleteAsync(int id);
+    Task DeleteByAtividadeIdAsync(Guid id);
 }
