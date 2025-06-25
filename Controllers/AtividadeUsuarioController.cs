@@ -57,6 +57,13 @@ public class AtividadeUsuarioController : ControllerBase
         await _atividadeUsuarioService.AddAsync(atividade, matricula, dto.comprovante);
         return Ok("Atividade adicionada com sucesso");
     }
+    [HttpPut("atividade/{atividadeId}")]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Update([FromForm] ReqUpdateAtividadeDTO dto, [FromRoute] Guid atividadeId)
+    {
+        var updatedAtividade = await _atividadeUsuarioService.UpdateAsync(dto, atividadeId);
+        return Ok(updatedAtividade);
+    }
     
     [HttpDelete("delete/atividade/{id}")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)

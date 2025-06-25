@@ -13,6 +13,17 @@ public class AtividadesRepository : IAtividadesRepository
     {
         _context = context;
     }
+    
+    public async Task<Atividades> GetByIdAsync(Guid id)
+    {
+        var atividade = await _context.Atividades
+            .FirstOrDefaultAsync(a => a.Id == id);
+        if (atividade == null)
+        {
+            throw new KeyNotFoundException($"Atividade com ID {id} não encontrada.");
+        }
+        return atividade;
+    }
 
     public async Task<IEnumerable<Atividades>> GetAllByUserMatriculaAsync(int matricula)
     {
@@ -56,6 +67,12 @@ public class AtividadesRepository : IAtividadesRepository
         {
             throw new KeyNotFoundException($"Atividade com ID {id} não encontrada.");
         }
+    }
+    
+    public async Task UpdateAsync(Atividades atividade)
+    {
+         _context.Atividades.Update(atividade);
+        var result = await _context.SaveChangesAsync();
     }
 
     public async Task<ResComprovanteDTO> GetComprovanteAsync(Guid id)

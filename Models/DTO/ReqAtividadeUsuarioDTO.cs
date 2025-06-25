@@ -3,10 +3,6 @@
 namespace SistemaCadastroDeHorasApi.Models.DTO;
 
 public record ReqAtividadeUsuarioDTO(
-    [Required, StringLength(100, MinimumLength = 3)]
-    string Nome,
-    [Required, StringLength(100, MinimumLength = 3)]
-    string Descricao,
     [Required,DataType(DataType.Date)]
     DateTime DataInicio,
     [Required,DataType(DataType.Date)]

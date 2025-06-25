@@ -10,5 +10,7 @@ public interface IAtividadesRepository
 
     Task<IEnumerable<Atividades>> GetAllByUserMatriculaAsync(int matricula);
     Task DeleteAsync(Guid id);
+    Task UpdateAsync(Atividades atividade);
+    Task<Atividades> GetByIdAsync(Guid id);
     Task<ResComprovanteDTO> GetComprovanteAsync(Guid id);
 }
