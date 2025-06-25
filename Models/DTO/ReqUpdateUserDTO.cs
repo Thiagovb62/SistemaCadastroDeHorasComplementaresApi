@@ -2,7 +2,5 @@
 
 public record ReqUpdateUserDTO(
     string Nome,
-    string Matricula,
-    string Senha,
-    int SemestreDeIngresso
+    string Senha
 );

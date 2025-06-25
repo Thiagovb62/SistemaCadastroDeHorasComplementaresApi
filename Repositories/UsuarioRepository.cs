@@ -51,15 +51,14 @@ public class UsuarioRepository : IUsuarioRepository
         await _context.SaveChangesAsync();
         return true;
     }
-    public async Task<Usuario> GetByMatriculaAsync(string matricula)
+    public async Task<Usuario> GetByMatriculaAsync(int matricula)
     {
-        if (string.IsNullOrEmpty(matricula))
-        { 
-            throw new ArgumentException("Matricula não pode ser nula ou vazia.", nameof(matricula));
+        var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Matricula == matricula);
+        if (usuario == null)
+        {
+            throw new KeyNotFoundException($"Usuário com matrícula {matricula} não encontrado.");
         }
-        Usuario? user = await _context.Usuarios.FirstOrDefaultAsync(u => u.Matricula == matricula);
-        
-        return user;
+        return usuario;
         
     }
 }

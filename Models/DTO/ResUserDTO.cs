@@ -3,5 +3,5 @@
 public record ResUserDTO(
     string Nome,
     int semestreDeIngresso,
-    string Matricula
+    int Matricula
     );

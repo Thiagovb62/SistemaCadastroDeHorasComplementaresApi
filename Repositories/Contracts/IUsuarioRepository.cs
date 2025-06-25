@@ -11,5 +11,5 @@ public interface IUsuarioRepository
     Task<Usuario> AddAsync(Usuario usuario);
     Task<Usuario> UpdateAsync(Usuario usuario);
     Task<bool> DeleteAsync(int id);
-    Task<Usuario> GetByMatriculaAsync(string matricula);
+    Task<Usuario> GetByMatriculaAsync(int matricula);
 }

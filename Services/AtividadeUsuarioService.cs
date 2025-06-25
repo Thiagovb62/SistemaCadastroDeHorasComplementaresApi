@@ -22,10 +22,10 @@ public class AtividadeUsuarioService: IAtividadeUsuarioService
         _comprovanteService = comprovanteAuxiliary;
     }
 
-    public Task<IEnumerable<ResAtividadeUsario>> GetAllByUserIdAsync(int id)
+    public Task<IEnumerable<ResAtividadeUsario>> GetAllByUserMatriculaAsync(int matricula)
     {
-        var atividades =  _atividadesRepository.GetByUserIdAsync(id).Result;
-        var user =  _usuarioRepository.GetByIdAsync(id).Result;
+        var atividades =  _atividadesRepository.GetAllByUserMatriculaAsync(matricula).Result;
+        var user =  _usuarioRepository.GetByMatriculaAsync(matricula).Result;
         
         return Task.FromResult(atividades.Select(a => new ResAtividadeUsario(
             new ResUserDTO(
@@ -53,14 +53,14 @@ public class AtividadeUsuarioService: IAtividadeUsuarioService
             
     }
 
-    public async Task AddAsync(Atividades atividade, int usuarioId, IFormFile comprovante)
+    public async Task AddAsync(Atividades atividade, int matricula, IFormFile comprovante)
     {
         var (arquivo, nomeArquivo, tipoArquivo) = _comprovanteService.ConvertComprovante(comprovante);
         atividade.comprovante = arquivo;
         atividade.nomeArquivo = nomeArquivo;
         atividade.tipoArquivo = tipoArquivo;
         
-        await _atividadeUsuarioRepositoryRepository.AddAsync(atividade, usuarioId);
+        await _atividadeUsuarioRepositoryRepository.AddAsync(atividade,matricula );
          
     }
 

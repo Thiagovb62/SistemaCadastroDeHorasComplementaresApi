@@ -22,11 +22,11 @@ public class UsuarioController : ControllerBase
         return Ok(usuarios);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    [HttpGet("{matricula}")]
+    public async Task<IActionResult> GetById(int matricula)
     {
-        var usuario = await _usuarioService.GetByIdAsync(id);
-        if (usuario == null) return NotFound();
+        var usuario = await _usuarioService.GetByMatriculaAsync(matricula);
+        
         return Ok(usuario);
     }
 

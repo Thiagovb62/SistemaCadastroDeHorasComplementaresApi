@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SistemaCadastroDeHorasApi.Models;
 using SistemaCadastroDeHorasApi.Models.DTO;
-using SistemaCadastroDeHorasApi.Repositories;
-using SistemaCadastroDeHorasApi.Repositories.Contracts;
+using SistemaCadastroDeHorasApi.Services;
 using SistemaCadastroDeHorasApi.Services.Contracts;
 
 namespace SistemaCadastroDeHorasApi.Controllers;
@@ -14,31 +13,35 @@ public class AtividadeUsuarioController : ControllerBase
 {
 
     private readonly IAtividadeUsuarioService _atividadeUsuarioService;
+    
+    private readonly IUsuarioService _usuarioService;
 
 
 
-    public AtividadeUsuarioController(IAtividadeUsuarioService atividadeUsuarioService)
+    public AtividadeUsuarioController(IAtividadeUsuarioService atividadeUsuarioService, IUsuarioService usuarioService)
     {
+        _usuarioService = usuarioService;
         _atividadeUsuarioService = atividadeUsuarioService;
     }
 
-    [HttpGet("atividadeUsuario/allAtividades/{userId}")]
-    public async Task<IActionResult> GetAll([FromRoute] int userId)
+    [HttpGet("atividade/all/{matricula}")]
+    public async Task<IActionResult> GetAll([FromRoute] int matricula)
     {
-        var atividadesUsuarios = await _atividadeUsuarioService.GetAllByUserIdAsync(userId);
+        var atividadesUsuarios = await _atividadeUsuarioService.GetAllByUserMatriculaAsync(matricula);
         return Ok(atividadesUsuarios);
     }
 
 
-    [HttpPost("add/{usuarioId}")]
+    [HttpPost("add/atividade/{matricula}")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Add([FromForm] ReqAtividadeUsuarioDTO dto, [FromRoute] int usuarioId)
+    public async Task<IActionResult> Add([FromForm] ReqAtividadeUsuarioDTO dto, [FromRoute] int matricula)
     {
+        var usuario = await _usuarioService.GetByMatriculaAsync(matricula);
         var atividade = new Atividades
         {
             Id = Guid.NewGuid(),
             TipoAtividadeId = dto.TipoAtividadeId,
-            UsuarioId = usuarioId,
+            UsuarioId = usuario.Id ,
             TipoParticipacaoId = dto.TipoParticipacaoId,
             pais = dto.pais,
             titulo = dto.titulo,
@@ -51,7 +54,7 @@ public class AtividadeUsuarioController : ControllerBase
             cnpj = dto.cnpj
         };
 
-        await _atividadeUsuarioService.AddAsync(atividade, usuarioId, dto.comprovante);
+        await _atividadeUsuarioService.AddAsync(atividade, matricula, dto.comprovante);
         return Ok("Atividade adicionada com sucesso");
     }
 

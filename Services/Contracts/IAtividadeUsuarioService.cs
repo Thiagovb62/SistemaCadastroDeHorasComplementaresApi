@@ -6,7 +6,7 @@ namespace SistemaCadastroDeHorasApi.Services.Contracts;
 public interface IAtividadeUsuarioService
 {
 
-    Task<IEnumerable<ResAtividadeUsario>> GetAllByUserIdAsync(int id);
-    Task AddAsync(Atividades atividade, int usuarioId, IFormFile comprovante);
+    Task<IEnumerable<ResAtividadeUsario>> GetAllByUserMatriculaAsync(int matriucla);
+    Task AddAsync(Atividades atividade, int matricula, IFormFile comprovante);
     Task DeleteAsync(int id);
 }

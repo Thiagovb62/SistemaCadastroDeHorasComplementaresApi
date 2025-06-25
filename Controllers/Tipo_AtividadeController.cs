@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SistemaCadastroDeHorasApi.Models;
-using SistemaCadastroDeHorasApi.Models.DTO;
 
 namespace SistemaCadastroDeHorasApi.Controllers;
 using Services;

@@ -8,7 +8,7 @@ namespace SistemaCadastroDeHorasApi.Repositories;
 public interface IAtividadesRepository
 {
 
-    Task<IEnumerable<Atividades>> GetByUserIdAsync(int id);
+    Task<IEnumerable<Atividades>> GetAllByUserMatriculaAsync(int matricula);
     Task DeleteAsync(Guid id);
     Task<ResComprovanteDTO> GetComprovanteAsync(Guid id);
 }

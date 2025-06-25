@@ -14,11 +14,11 @@ public class AtividadesRepository : IAtividadesRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Atividades>> GetByUserIdAsync(int id)
+    public async Task<IEnumerable<Atividades>> GetAllByUserMatriculaAsync(int matricula)
     {
         //para evitar que o get exponha a byte array do comprovante
         return await _context.Atividades
-            .Where(a => a.UsuarioId == id)
+            .Where(a => a.usuario.Matricula == matricula)
             .Select(a => new Atividades
             {
                 Id = a.Id,

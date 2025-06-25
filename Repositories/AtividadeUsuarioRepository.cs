@@ -18,11 +18,7 @@ public class AtividadeUsuarioRepository : IAtividadeUsuarioRepository
         _context = context;
         _usuarioRepository = usuarioRepository;
     }
-
-    public StatusAtividadeEnum? obterStatusAtividadePorNome(string nome)
-    {
-        return StatusAtividadeEnumExtensions.FromString(nome);
-    }
+    
     
     public Task<IEnumerable<AtividadeUsuario>> GetAllAsync()
     {
@@ -42,7 +38,7 @@ public class AtividadeUsuarioRepository : IAtividadeUsuarioRepository
         return Task.FromResult(atividadeUsuario);
     }
 
-    public Task<IEnumerable<AtividadeUsuario>> GetByUsuarioIdAsync(int usuarioId)
+    public Task<IEnumerable<AtividadeUsuario>> GetAllByUserMatriculaAsync(int usuarioId)
     {
         var atividades = _context.AtividadeUsuarios
             .Where(a => a.UsuarioId == usuarioId)
@@ -65,7 +61,7 @@ public class AtividadeUsuarioRepository : IAtividadeUsuarioRepository
         return Task.FromResult(atividades);
     }
 
-    public Task AddAsync(Atividades atividade,int usuarioId)
+    public Task AddAsync(Atividades atividade,int matricula)
     {
         
         if (atividade == null)
@@ -73,15 +69,13 @@ public class AtividadeUsuarioRepository : IAtividadeUsuarioRepository
             throw new ArgumentNullException(nameof(atividade), "Atividade não pode ser nula.");
         }
         
-        Usuario usuario = _usuarioRepository.GetByIdAsync(usuarioId).Result;
+        Usuario usuario = _usuarioRepository.GetByMatriculaAsync(matricula).Result;
         
 
         var atividadeUsuario = new AtividadeUsuario
         {
             Id = Guid.NewGuid(),
-            UsuarioId = usuarioId,
             Usuario = usuario,
-            AtividadeId = atividade.Id,
             Atividade = atividade,
             Status = StatusAtividadeEnum.PENDENTE 
         };

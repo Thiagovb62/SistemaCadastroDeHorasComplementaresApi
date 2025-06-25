@@ -13,7 +13,7 @@ public class Usuario
     public string Nome { get; set; }
 
     [Required]
-    public string Matricula { get; set; }
+    public int Matricula { get; set; }
 
     [Required]
     public string Senha { get; set; }
