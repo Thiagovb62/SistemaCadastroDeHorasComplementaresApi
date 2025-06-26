@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query;
 using SistemaCadastroDeHorasApi.Models;
 using SistemaCadastroDeHorasApi.Models.DTO;
 using SistemaCadastroDeHorasApi.Services;
@@ -16,12 +17,14 @@ public class AtividadeUsuarioController : ControllerBase
     
     private readonly IUsuarioService _usuarioService;
 
+    private readonly IComprovanteService _comprovanteService;
 
 
-    public AtividadeUsuarioController(IAtividadeUsuarioService atividadeUsuarioService, IUsuarioService usuarioService)
+    public AtividadeUsuarioController(IAtividadeUsuarioService atividadeUsuarioService, IUsuarioService usuarioService, IComprovanteService comprovanteService)
     {
         _usuarioService = usuarioService;
         _atividadeUsuarioService = atividadeUsuarioService;
+        _comprovanteService = comprovanteService;
     }
 
     [HttpGet("atividade/all/{matricula}")]
@@ -72,5 +75,12 @@ public class AtividadeUsuarioController : ControllerBase
         return Ok("Atividade deletada com sucesso");
     }
 
+    [HttpGet("atividade/comprovante/{matricula}/{atividadeId}")]
+    public async Task<IActionResult> GetComprovante([FromRoute] Guid atividadeId)
+    {
+        var comprovante = await _comprovanteService.GetComprovante(atividadeId);
+
+        return File(comprovante, "application/pdf", "comprovante.pdf");
+    }
     
 }

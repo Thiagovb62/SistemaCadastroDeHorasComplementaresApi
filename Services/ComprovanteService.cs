@@ -1,10 +1,16 @@
-using SistemaCadastroDeHorasApi.Models;
-using SistemaCadastroDeHorasApi.Models.DTO;
+using SistemaCadastroDeHorasApi.Repositories;
 
 namespace SistemaCadastroDeHorasApi.Services;
 
 public class ComprovanteService : IComprovanteService
 {
+    private readonly IAtividadesRepository _atividadesRepository;
+
+    public ComprovanteService  (IAtividadesRepository atividadesRepository)
+    {
+        _atividadesRepository = atividadesRepository;
+    }
+
     public (byte[] comprovante, string nomeArquivo, string tipoArquivo) ConvertComprovante(IFormFile comprovante)
     {
         if (comprovante == null || comprovante.Length > 5 * 1024 * 1024)
@@ -21,5 +27,12 @@ public class ComprovanteService : IComprovanteService
         comprovante.CopyTo(memoryStream);
 
         return (memoryStream.ToArray(), comprovante.FileName, comprovante.ContentType);
+    }
+
+    public async Task<byte[]> GetComprovante(Guid atividadeId)
+    {
+        var comprovanteAtividade = await _atividadesRepository.GetComprovanteAsync(atividadeId);
+
+        return comprovanteAtividade.arquivo;
     }
 }

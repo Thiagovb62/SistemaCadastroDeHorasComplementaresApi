@@ -74,7 +74,7 @@ public class AtividadesRepository : IAtividadesRepository
          _context.Atividades.Update(atividade);
         var result = await _context.SaveChangesAsync();
     }
-
+    
     public async Task<ResComprovanteDTO> GetComprovanteAsync(Guid id)
     {
         var comprovante = await _context.Atividades
@@ -84,7 +84,7 @@ public class AtividadesRepository : IAtividadesRepository
                 a.nomeArquivo,
                 a.tipoArquivo
             )).FirstOrDefaultAsync();
-        if (comprovante == null) throw new BadHttpRequestException("Não foi possivel encontrar o comprovante da atividade.");
+        if (comprovante == null) throw new KeyNotFoundException("Não foi possivel encontrar o comprovante da atividade.");
 
         return comprovante;
     }
