@@ -61,4 +61,14 @@ public class UsuarioRepository : IUsuarioRepository
         return usuario;
         
     }
+
+    public async Task GetByMatriculaToCreateUserAsync(int matricula)
+    {
+        var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Matricula == matricula);
+        
+        if (usuario != null)
+        {
+            throw new BadHttpRequestException("Usuário já existe com esta matrícula.");
+        }
+    }
 }

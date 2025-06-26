@@ -34,9 +34,10 @@ public class UsuarioController : ControllerBase
     public async Task<IActionResult> Create([FromBody] ReqUserDTO usuario)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        var createdUsuario = await _usuarioService.CreateAsync(usuario);
-        return CreatedAtAction(nameof(GetById), new { id = createdUsuario.Id }, createdUsuario);
+        
+        await _usuarioService.CreateAsync(usuario);
+        
+        return Ok("Usuário criado com sucesso.");
     }
 
     [HttpPut("{id}")]

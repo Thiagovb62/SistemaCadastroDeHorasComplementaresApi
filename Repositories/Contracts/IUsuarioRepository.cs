@@ -12,4 +12,5 @@ public interface IUsuarioRepository
     Task<Usuario> UpdateAsync(Usuario usuario);
     Task<bool> DeleteAsync(int id);
     Task<Usuario> GetByMatriculaAsync(int matricula);
+    Task GetByMatriculaToCreateUserAsync(int matricula);
 }

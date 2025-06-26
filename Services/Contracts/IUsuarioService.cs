@@ -9,7 +9,7 @@ public interface IUsuarioService
 {
     Task<IEnumerable<Usuario>> GetAllAsync();
     Task<Usuario> GetByMatriculaAsync(int matricula);
-    Task<Usuario> CreateAsync(ReqUserDTO usuario);
+    Task<string> CreateAsync(ReqUserDTO usuario);
     Task<Usuario> UpdateAsync(int id, ReqUpdateUserDTO usuario);
     Task<bool> DeleteAsync(int matricula);
 }

@@ -40,25 +40,23 @@ public class UsuarioService : IUsuarioService
         if (usuario == null) throw new BadHttpRequestException("Usuário não encontrado.");
         return usuario;
     }
-    public async Task<Usuario> CreateAsync(ReqUserDTO usuario)
+    public async Task<string> CreateAsync(ReqUserDTO usuario)
     {
         
-        var existingUsuario = await _usuarioRepository.GetByMatriculaAsync(usuario.Matricula);
-        
-        if (existingUsuario != null)
-        {
-            throw new BadHttpRequestException("Usuário já existe com esta matrícula.");
-        }
-        Usuario newUsuario = new Usuario
-        {
-            Nome = usuario.Nome,
-            Matricula = usuario.Matricula,
-            Senha = HashPassword(usuario.Senha),
-            Role = "ALUNO",
-            SemestreDeIngresso = usuario.SemestreDeIngresso
-        };
+        await _usuarioRepository.GetByMatriculaToCreateUserAsync(usuario.Matricula);
+      
+            Usuario newUsuario = new Usuario
+            {
+                Nome = usuario.Nome,
+                Matricula = usuario.Matricula,
+                Senha = HashPassword(usuario.Senha),
+                Role = "ALUNO",
+                SemestreDeIngresso = usuario.SemestreDeIngresso
+            };
 
-        return await _usuarioRepository.AddAsync(newUsuario);
+        await _usuarioRepository.AddAsync(newUsuario);
+        
+        return "Usuário criado com sucesso.";
     }
 
     public async Task<Usuario> UpdateAsync(int id, ReqUpdateUserDTO usuario)
