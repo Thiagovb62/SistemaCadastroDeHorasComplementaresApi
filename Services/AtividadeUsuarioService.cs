@@ -1,6 +1,5 @@
 ﻿using SistemaCadastroDeHorasApi.Models;
 using SistemaCadastroDeHorasApi.Models.DTO;
-using SistemaCadastroDeHorasApi.Models.ENUMS;
 using SistemaCadastroDeHorasApi.Repositories;
 using SistemaCadastroDeHorasApi.Repositories.Contracts;
 using SistemaCadastroDeHorasApi.Services.Contracts;
