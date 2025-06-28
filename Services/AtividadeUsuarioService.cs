@@ -3,6 +3,7 @@ using SistemaCadastroDeHorasApi.Models.DTO;
 using SistemaCadastroDeHorasApi.Repositories;
 using SistemaCadastroDeHorasApi.Repositories.Contracts;
 using SistemaCadastroDeHorasApi.Services.Contracts;
+using SistemaCadastroDeHorasApi.Services.Factory;
 
 namespace SistemaCadastroDeHorasApi.Services;
 
@@ -52,15 +53,15 @@ public class AtividadeUsuarioService: IAtividadeUsuarioService
             
     }
 
-    public async Task AddAsync(Atividades atividade, int matricula, IFormFile comprovante)
+    public void AddAsync(ReqAtividadeUsuarioDTO dto, int matricula, IFormFile comprovante)
     {
-        var (arquivo, nomeArquivo, tipoArquivo) = _comprovanteService.ConvertComprovante(comprovante);
-        atividade.comprovante = arquivo;
-        atividade.nomeArquivo = nomeArquivo;
-        atividade.tipoArquivo = tipoArquivo;
+        AtividadeFactory atividadeFactory =  new AtividadeFactory( 
+            _usuarioRepository,
+            _comprovanteService,
+            _atividadeUsuarioRepositoryRepository
+        );
+        atividadeFactory.CriarAtividade(dto, matricula, comprovante);
         
-        await _atividadeUsuarioRepositoryRepository.AddAsync(atividade,matricula );
-         
     }
     public async Task<string> UpdateAsync(ReqUpdateAtividadeDTO dto, Guid atividadeId)
     {
