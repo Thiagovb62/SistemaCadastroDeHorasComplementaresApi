@@ -7,7 +7,6 @@ public interface ITipo_AtividadeRepository
 
     Task<IEnumerable<Tipo_Atividade>> GetAllAsync();
     Task<Tipo_Atividade> GetByNomeAsync(String nome);
-    Task<Tipo_Atividade> CreateAsync(Tipo_Atividade tipoAtividade);
     Task<Tipo_Atividade> GetByIdAsync(int id);
     
 }

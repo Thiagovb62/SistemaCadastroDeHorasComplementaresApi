@@ -39,18 +39,7 @@ public class Tipo_AtividadeRepository : ITipo_AtividadeRepository
         return Task.FromResult(tipoAtividade);
         
     }
-
-    public async Task<Tipo_Atividade> CreateAsync(Tipo_Atividade tipoAtividade)
-    {
-        if (tipoAtividade == null)
-        {
-            throw new ArgumentNullException(nameof(tipoAtividade), "Tipo de atividade não pode ser nulo.");
-        }
-
-        _context.TiposAtividade.Add(tipoAtividade);
-        await _context.SaveChangesAsync();
-        return tipoAtividade;
-    }
+    
 
     public Task<Tipo_Atividade> GetByIdAsync(int id)
     {

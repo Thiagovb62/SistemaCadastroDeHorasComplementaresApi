@@ -61,28 +61,6 @@ public class Tipo_AtividadeService : ITipo_AtividadeService
         });
     }
     
-    
-    
-    
-    
-
-    public async Task<Tipo_Atividade> CreateAsync(ReqTipo_AtividadeDTO dto)
-    {
-        if (dto == null)
-        {
-            throw new ArgumentNullException(nameof(dto), "Tipo de atividade não pode ser nulo.");
-        }
-
-        Tipo_AtividadeEnum tipoAtividadeEnum = ObterTipoAtividadePorNome(dto.nome)
-            ?? throw new ArgumentException($"Tipo de atividade '{dto.nome}' não é válido.", nameof(dto.nome));
-        
-        var tipoAtividade = new Tipo_Atividade
-        {
-            nome = tipoAtividadeEnum,
-        };
-
-        return await _tipoAtividadeRepository.CreateAsync(tipoAtividade);
-    }
 
     public Task<ResTipoAtividadeDTO> GetByIdAsync(int id)
     {
