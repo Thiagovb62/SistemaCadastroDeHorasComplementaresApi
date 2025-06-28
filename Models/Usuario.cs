@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,9 +18,59 @@ public class Usuario
 
     [Required]
     public string Senha { get; set; }
-    
-    public string Role { get; set; }
 
     [Required]
     public int SemestreDeIngresso { get; set; }
+    
+    [DefaultValue(288)]
+    public int HorasTotais { get; set; }
+    
+    [DefaultValue(96)]
+    public int HorasTotaisDeIniciacaoADocenciaOuVivenciaOuExtensão { get; set; }
+    
+    [DefaultValue(32)]
+    public int HorasTotaisDeParticipacaoOuOrganizacaoDeEventos { get; set; }
+    
+    
+    [DefaultValue(80)]
+    public int HorasTotaisDeAtividadesArtisticoCulturaisEEsportivas { get; set; }
+    
+        
+    [DefaultValue(64)]
+    public int HorasTotaisDeExperienciasLigadasAFormacaoProfissional { get; set; }
+    
+
+    [DefaultValue(96)]
+    public int HorasTotaisDeProducaoTecnicaOuCientifica { get; set; }
+    
+    [DefaultValue(48)]
+    public int HorasTotaisDeVivenciasDeGestao { get; set; }
+        
+    [DefaultValue(48)]
+    public int HorasTotaisDeOutrasAtividades { get; set; }
+    
+    [DefaultValue(0)]
+    public int horasRestantesTotais { get; set; }
+    
+    [DefaultValue(0)]
+    public int horasRestantesDeIniciacaoADocenciaOuVivenciaOuExtensão { get; set; }
+    
+    [DefaultValue(0)]
+    public int horasRestantesDeParticipacaoOuOrganizacaoDeEventos { get; set; }
+    
+    [DefaultValue(0)]
+    public int horasRestantesDeAtividadesArtisticoCulturaisEEsportivas { get; set; }
+    
+    [DefaultValue(0)]
+    public int horasRestantesDeExperienciasLigadasAFormacaoProfissional { get; set; }
+    
+    [DefaultValue(0)]
+    public int horasRestantesDeProducaoTecnicaOuCientifica { get; set; }
+    
+    [DefaultValue(0)]
+    public int horasRestantesDeVivenciasDeGestao { get; set; }
+    
+    [DefaultValue(0)]
+    public int horasRestantesDeOutrasAtividades { get; set; }
+   
 }

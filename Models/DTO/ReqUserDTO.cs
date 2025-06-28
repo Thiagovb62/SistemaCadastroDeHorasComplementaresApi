@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace SistemaCadastroDeHorasApi.Models.DTO;
@@ -13,5 +14,4 @@ public record ReqUserDTO(
     string Senha,
     [Required(ErrorMessage = "O semestre de ingresso é obrigatório")]
     int SemestreDeIngresso
-   
 );

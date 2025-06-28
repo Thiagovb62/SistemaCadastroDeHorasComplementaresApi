@@ -50,7 +50,6 @@ public class UsuarioService : IUsuarioService
                 Nome = usuario.Nome,
                 Matricula = usuario.Matricula,
                 Senha = HashPassword(usuario.Senha),
-                Role = "ALUNO",
                 SemestreDeIngresso = usuario.SemestreDeIngresso
             };
 

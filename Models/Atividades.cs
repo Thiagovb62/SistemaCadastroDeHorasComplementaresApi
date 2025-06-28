@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using SistemaCadastroDeHorasApi.Models.ENUMS;
 
 
 namespace SistemaCadastroDeHorasApi.Models;
@@ -53,4 +54,7 @@ public class Atividades
     [Required][StringLength(100)] public string nomeArquivo { get; set; }
 
     [Required][StringLength(50)] public string tipoArquivo { get; set; }
+    
+    public TipoAtividadeComplementarHorasEnum  tipoAtividadeComplementarHoras { get; set; }
+    
 }
