@@ -4,6 +4,7 @@ using SistemaCadastroDeHorasApi.Models;
 using SistemaCadastroDeHorasApi.Models.DTO;
 using SistemaCadastroDeHorasApi.Services;
 using SistemaCadastroDeHorasApi.Services.Contracts;
+using SistemaCadastroDeHorasApi.Services.Factory;
 
 namespace SistemaCadastroDeHorasApi.Controllers;
 [ApiController]
@@ -49,6 +50,13 @@ public class AtividadeUsuarioController : ControllerBase
         var updatedAtividade = await _atividadeUsuarioService.UpdateAsync(dto, atividadeId);
         return Ok(updatedAtividade);
     }
+    [HttpPut("atividade/integralizar/{atividadeId}")]
+    public IActionResult Integralizar([FromRoute] Guid atividadeId)
+    {
+        _atividadeUsuarioService.IntegralizarHoras(atividadeId);
+        return Ok("Atividade integralizada com sucesso");
+    }
+    
     
     [HttpDelete("delete/atividade/{id}")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)

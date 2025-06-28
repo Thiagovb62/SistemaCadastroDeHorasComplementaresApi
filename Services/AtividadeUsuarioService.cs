@@ -7,7 +7,7 @@ using SistemaCadastroDeHorasApi.Services.Factory;
 
 namespace SistemaCadastroDeHorasApi.Services;
 
-public class AtividadeUsuarioService: IAtividadeUsuarioService
+public class AtividadeUsuarioService:  IAtividadeUsuarioService
 {
     
     private readonly IAtividadeUsuarioRepository _atividadeUsuarioRepositoryRepository;
@@ -55,13 +55,18 @@ public class AtividadeUsuarioService: IAtividadeUsuarioService
 
     public void AddAsync(ReqAtividadeUsuarioDTO dto, int matricula, IFormFile comprovante)
     {
-        AtividadeFactory atividadeFactory =  new AtividadeFactory( 
+        AtividadeFactory atividadeFactory =  new ConcreteAtividadeFactory( 
             _usuarioRepository,
             _comprovanteService,
             _atividadeUsuarioRepositoryRepository
         );
         atividadeFactory.CriarAtividade(dto, matricula, comprovante);
         
+    }
+    public void IntegralizarHoras(Guid atividadeId)
+    {
+        IntegralizacaoHorasFactory horasFactory = new ConcreteHorasFactory(_usuarioRepository, _atividadesRepository);
+        horasFactory.alocarHoras(atividadeId);
     }
     public async Task<string> UpdateAsync(ReqUpdateAtividadeDTO dto, Guid atividadeId)
     {

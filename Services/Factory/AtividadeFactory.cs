@@ -6,7 +6,7 @@ using SistemaCadastroDeHorasApi.Repositories.Contracts;
 
 namespace SistemaCadastroDeHorasApi.Services.Factory;
 
-public class AtividadeFactory
+public abstract class AtividadeFactory
 {
     
     private readonly IUsuarioRepository _usuarioRepository;

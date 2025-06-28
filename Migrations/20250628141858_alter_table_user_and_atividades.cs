@@ -16,7 +16,7 @@ namespace SistemaCadastroDeHorasApi.Migrations
                 name: "horasRestantesTotais",
                 table: "Usuarios",
                 type: "integer",
-                defaultValue: 0);
+                defaultValue:288);
 
             migrationBuilder.AddColumn<int>(
                 name: "tipoAtividadeComplementarHoras",
@@ -28,7 +28,7 @@ namespace SistemaCadastroDeHorasApi.Migrations
                 name: "HorasTotais",
                 table: "Usuarios",
                 type: "integer",
-                defaultValue: 0);
+                defaultValue: 288);
 
             migrationBuilder.AddColumn<int>(
                 name: "HorasTotaisDeAtividadesArtisticoCulturaisEEsportivas",
@@ -84,49 +84,49 @@ namespace SistemaCadastroDeHorasApi.Migrations
                 table: "Usuarios",
                 type: "integer",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 80);
 
             migrationBuilder.AddColumn<int>(
                 name: "horasRestantesDeExperienciasLigadasAFormacaoProfissional",
                 table: "Usuarios",
                 type: "integer",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 64);
 
             migrationBuilder.AddColumn<int>(
                 name: "horasRestantesDeIniciacaoADocenciaOuVivenciaOuExtensão",
                 table: "Usuarios",
                 type: "integer",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 96);
 
             migrationBuilder.AddColumn<int>(
                 name: "horasRestantesDeOutrasAtividades",
                 table: "Usuarios",
                 type: "integer",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 48);
 
             migrationBuilder.AddColumn<int>(
                 name: "horasRestantesDeParticipacaoOuOrganizacaoDeEventos",
                 table: "Usuarios",
                 type: "integer",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 32);
 
             migrationBuilder.AddColumn<int>(
                 name: "horasRestantesDeProducaoTecnicaOuCientifica",
                 table: "Usuarios",
                 type: "integer",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 68);
 
             migrationBuilder.AddColumn<int>(
                 name: "horasRestantesDeVivenciasDeGestao",
                 table: "Usuarios",
                 type: "integer",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 48);
         }
 
         /// <inheritdoc />

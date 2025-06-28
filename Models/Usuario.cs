@@ -49,28 +49,28 @@ public class Usuario
     [DefaultValue(48)]
     public int HorasTotaisDeOutrasAtividades { get; set; }
     
-    [DefaultValue(0)]
+    [DefaultValue(288)]
     public int horasRestantesTotais { get; set; }
     
-    [DefaultValue(0)]
+    [DefaultValue(96)]
     public int horasRestantesDeIniciacaoADocenciaOuVivenciaOuExtensão { get; set; }
     
-    [DefaultValue(0)]
+    [DefaultValue(32)]
     public int horasRestantesDeParticipacaoOuOrganizacaoDeEventos { get; set; }
     
-    [DefaultValue(0)]
+    [DefaultValue(80)]
     public int horasRestantesDeAtividadesArtisticoCulturaisEEsportivas { get; set; }
     
-    [DefaultValue(0)]
+    [DefaultValue(64)]
     public int horasRestantesDeExperienciasLigadasAFormacaoProfissional { get; set; }
     
-    [DefaultValue(0)]
+    [DefaultValue(68)]
     public int horasRestantesDeProducaoTecnicaOuCientifica { get; set; }
     
-    [DefaultValue(0)]
+    [DefaultValue(48)]
     public int horasRestantesDeVivenciasDeGestao { get; set; }
     
-    [DefaultValue(0)]
+    [DefaultValue(48)]
     public int horasRestantesDeOutrasAtividades { get; set; }
    
 }
