@@ -34,6 +34,20 @@ public class AtividadeUsuarioController : ControllerBase
         var atividadesUsuarios = await _atividadeUsuarioService.GetAllByUserMatriculaAsync(matricula);
         return Ok(atividadesUsuarios);
     }
+    
+    [HttpGet("atividade/hora/details/{matricula}")]
+    public async Task<IActionResult> GetHorasDetails([FromRoute] int matricula)
+    {
+        var horasDetails = await _atividadeUsuarioService.GetHorasDeatailsByMatricula(matricula);
+        return Ok(horasDetails);
+    }
+    
+    [HttpGet("atividade/tipo")]
+    public async Task<IActionResult> GetTipoAtividadeComplementar([FromQuery] int matricula, [FromQuery] int codigo)
+    {
+        var tipoAtividade =  _atividadeUsuarioService.GetTipoAtividadeComplementarByIdAsync(matricula, codigo);
+        return Ok(tipoAtividade);
+    }
 
 
     [HttpPost("add/atividade/{matricula}")]

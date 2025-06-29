@@ -11,4 +11,6 @@ public interface IAtividadeUsuarioService
     void IntegralizarHoras(Guid atividadeId);
     Task<string> UpdateAsync(ReqUpdateAtividadeDTO dto, Guid atividadeId);
     Task DeleteByAtividadeIdAsync(Guid id);
+    Task<IEnumerable<ResHoraDetailsDTO>> GetHorasDeatailsByMatricula(int matricula);
+    int GetTipoAtividadeComplementarByIdAsync(int matricula,int codigo);
 }

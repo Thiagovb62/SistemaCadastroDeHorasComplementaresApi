@@ -5,7 +5,6 @@ namespace SistemaCadastroDeHorasApi.Models.ENUMS;
 
 public enum TipoAtividadeComplementarHorasEnum
 {
-
     [Description("Iniciação a Docência, Pesquisa e/ou Extensão")]
     IniciacaoDocenciaPesquisaExtensao,
 
@@ -21,12 +20,9 @@ public enum TipoAtividadeComplementarHorasEnum
     [Description("Produção Técnica e/ou Científica")]
     ProducaoTecnicaCientifica,
 
-    [Description("Vivências de Gestão")]
-    VivenciasDeGestao,
+    [Description("Vivências de Gestão")] VivenciasDeGestao,
 
-    [Description("Outras Atividades")]
-    OutrasAtividades
-
+    [Description("Outras Atividades")] OutrasAtividades
 }
 
 public static class TipoAtividadeComplementarHorasEnumExtensions
@@ -37,9 +33,11 @@ public static class TipoAtividadeComplementarHorasEnumExtensions
         {
             return result;
         }
-        return null; 
+
+        return null;
     }
-    public static string GetDescription(this Enum value) 
+
+    public static string GetDescription(this Enum value)
     {
         FieldInfo? fieldInfo = value.GetType().GetField(value.ToString());
         if (fieldInfo == null) return value.ToString();
@@ -47,5 +45,15 @@ public static class TipoAtividadeComplementarHorasEnumExtensions
         var attributes = (DescriptionAttribute[]?)fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
         return attributes is { Length: > 0 } ? attributes[0].Description : value.ToString();
+    }
+
+    public static TipoAtividadeComplementarHorasEnum? FromCode(int code)
+    {
+        if (Enum.IsDefined(typeof(TipoAtividadeComplementarHorasEnum), code))
+        {
+            return FromString(Enum.GetName(typeof(TipoAtividadeComplementarHorasEnum), code) ?? string.Empty);
+        }
+
+        return null;
     }
 }
