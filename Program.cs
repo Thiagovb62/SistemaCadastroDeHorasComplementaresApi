@@ -24,6 +24,8 @@ var connectionString = $"Host={host};Port=5432;Database={database};Username={use
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(connectionString));
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();

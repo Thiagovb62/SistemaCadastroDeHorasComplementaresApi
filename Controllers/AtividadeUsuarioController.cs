@@ -1,76 +1,74 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query;
-using SistemaCadastroDeHorasApi.Models;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using SistemaCadastroDeHorasApi.Models.DTO;
-using SistemaCadastroDeHorasApi.Services;
-using SistemaCadastroDeHorasApi.Services.Contracts;
-using SistemaCadastroDeHorasApi.Services.Factory;
+using SistemaCadastroDeHorasApi.Application.Features.Commands;
+using SistemaCadastroDeHorasApi.Application.Features.Queries;
+
 
 namespace SistemaCadastroDeHorasApi.Controllers;
+
 [ApiController]
-[Microsoft.AspNetCore.Components.Route("api/[controller]")]
-[Produces("application/json")]
-[Consumes("application/json")]
+[Route("api/[controller]")]
 public class AtividadeUsuarioController : ControllerBase
 {
+    private readonly IMediator _mediator;
 
-    private readonly IAtividadeUsuarioService _atividadeUsuarioService;
-    
-    private readonly IUsuarioService _usuarioService;
-
-    private readonly IComprovanteService _comprovanteService;
-
-
-    public AtividadeUsuarioController(IAtividadeUsuarioService atividadeUsuarioService, IUsuarioService usuarioService, IComprovanteService comprovanteService)
+    // O controller agora só depende do IMediator
+    public AtividadeUsuarioController(IMediator mediator)
     {
-        _usuarioService = usuarioService;
-        _atividadeUsuarioService = atividadeUsuarioService;
-        _comprovanteService = comprovanteService;
+        _mediator = mediator;
     }
 
     [HttpGet("atividade/all/{matricula}")]
     public async Task<IActionResult> GetAll([FromRoute] int matricula)
     {
-        var atividadesUsuarios = await _atividadeUsuarioService.GetAllByUserMatriculaAsync(matricula);
+        // Cria e envia uma query para buscar os dados
+        var query = new GetAllAtividadesQuery { Matricula = matricula };
+        var atividadesUsuarios = await _mediator.Send(query);
         return Ok(atividadesUsuarios);
     }
 
-
     [HttpPost("add/atividade/{matricula}")]
     [Consumes("multipart/form-data")]
-    public IActionResult Add([FromForm] ReqAtividadeUsuarioDTO dto, [FromRoute] int matricula)
+    public async Task<IActionResult> Add([FromForm] ReqAtividadeUsuarioDTO dto, [FromRoute] int matricula)
     {
-        _atividadeUsuarioService.AddAsync(dto, matricula, dto.comprovante);
+        // Cria e envia um comando para adicionar a atividade
+        var command = new AddAtividadeCommand
+        {
+            Dto = dto,
+            Matricula = matricula,
+            Comprovante = dto.comprovante
+        };
+        await _mediator.Send(command);
         return Ok("Atividade adicionada com sucesso");
     }
+
     [HttpPut("atividade/{atividadeId}")]
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> Update([FromForm] ReqUpdateAtividadeDTO dto, [FromRoute] Guid atividadeId)
     {
-        var updatedAtividade = await _atividadeUsuarioService.UpdateAsync(dto, atividadeId);
+        // Cria e envia um comando para atualizar a atividade
+        var command = new UpdateAtividadeCommand { Dto = dto, AtividadeId = atividadeId };
+        var updatedAtividade = await _mediator.Send(command);
         return Ok(updatedAtividade);
     }
+
     [HttpPut("atividade/integralizar/{atividadeId}")]
-    public IActionResult Integralizar([FromRoute] Guid atividadeId)
+    public async Task<IActionResult> Integralizar([FromRoute] Guid atividadeId)
     {
-        _atividadeUsuarioService.IntegralizarHoras(atividadeId);
+        // Cria e envia um comando para integralizar as horas
+        var command = new IntegralizarAtividadeCommand { AtividadeId = atividadeId };
+        await _mediator.Send(command);
         return Ok("Atividade integralizada com sucesso");
     }
-    
-    
+
     [HttpDelete("delete/atividade/{id}")]
     public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
-        await _atividadeUsuarioService.DeleteByAtividadeIdAsync(id);
+        // Cria e envia um comando para deletar a atividade
+        var command = new DeleteAtividadeCommand { AtividadeId = id };
+        await _mediator.Send(command);
         return Ok("Atividade deletada com sucesso");
-    }
-
-    [HttpGet("atividade/comprovante/{matricula}/{atividadeId}")]
-    public async Task<IActionResult> GetComprovante([FromRoute] Guid atividadeId)
-    {
-        var comprovante = await _comprovanteService.GetComprovante(atividadeId);
-
-        return File(comprovante, "application/pdf", "comprovante.pdf");
     }
     
 }
