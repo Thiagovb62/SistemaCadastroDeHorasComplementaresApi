@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace SistemaCadastroDeHorasApi.Models.ENUMS;
 
-public enum TipoAtividadeComplementarHorasEnum
+public enum CategoriaAtividadeComplementarEnum
 {
     [Description("Iniciação a Docência, Pesquisa e/ou Extensão")]
     IniciacaoDocenciaPesquisaExtensao,
@@ -25,11 +25,11 @@ public enum TipoAtividadeComplementarHorasEnum
     [Description("Outras Atividades")] OutrasAtividades
 }
 
-public static class TipoAtividadeComplementarHorasEnumExtensions
+public static class CategoriaAtividadeComplementarEnumExtensions
 {
-    public static TipoAtividadeComplementarHorasEnum? FromString(string value)
+    public static CategoriaAtividadeComplementarEnum? FromString(string value)
     {
-        if (Enum.TryParse<TipoAtividadeComplementarHorasEnum>(value, true, out var result))
+        if (Enum.TryParse<CategoriaAtividadeComplementarEnum>(value, true, out var result))
         {
             return result;
         }
@@ -47,11 +47,11 @@ public static class TipoAtividadeComplementarHorasEnumExtensions
         return attributes is { Length: > 0 } ? attributes[0].Description : value.ToString();
     }
 
-    public static TipoAtividadeComplementarHorasEnum? FromCode(int code)
+    public static CategoriaAtividadeComplementarEnum? FromCode(int code)
     {
-        if (Enum.IsDefined(typeof(TipoAtividadeComplementarHorasEnum), code))
+        if (Enum.IsDefined(typeof(CategoriaAtividadeComplementarEnum), code))
         {
-            return FromString(Enum.GetName(typeof(TipoAtividadeComplementarHorasEnum), code) ?? string.Empty);
+            return FromString(Enum.GetName(typeof(CategoriaAtividadeComplementarEnum), code) ?? string.Empty);
         }
 
         return null;

@@ -47,7 +47,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.AtividadesArtisticoCulturaisEsportivas
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.AtividadesArtisticoCulturaisEsportivas
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -70,7 +70,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.ParticipacaoOrganizacaoEventos
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.ParticipacaoOrganizacaoEventos
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -93,7 +93,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.ParticipacaoOrganizacaoEventos
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.ParticipacaoOrganizacaoEventos
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -116,7 +116,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.ParticipacaoOrganizacaoEventos
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.ParticipacaoOrganizacaoEventos
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -139,7 +139,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.ExperienciasProfissionais
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.ExperienciasProfissionais
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -162,7 +162,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.IniciacaoDocenciaPesquisaExtensao
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.IniciacaoDocenciaPesquisaExtensao
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -185,7 +185,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.IniciacaoDocenciaPesquisaExtensao
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.IniciacaoDocenciaPesquisaExtensao
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -208,7 +208,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.OutrasAtividades
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.OutrasAtividades
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -231,7 +231,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.IniciacaoDocenciaPesquisaExtensao
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.IniciacaoDocenciaPesquisaExtensao
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -254,7 +254,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.ProducaoTecnicaCientifica
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.ProducaoTecnicaCientifica
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -277,7 +277,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.IniciacaoDocenciaPesquisaExtensao
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.IniciacaoDocenciaPesquisaExtensao
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -300,7 +300,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.IniciacaoDocenciaPesquisaExtensao
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.IniciacaoDocenciaPesquisaExtensao
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
@@ -323,7 +323,7 @@ public abstract class AtividadeFactory
                     isExecUfc = dto.isExecUfc,
                     qtdHorasUtilizadas = dto.qtdHorasUtilizadas,
                     cnpj = dto.cnpj,
-                    tipoAtividadeComplementarHoras = TipoAtividadeComplementarHorasEnum.VivenciasDeGestao
+                    categoriaAtividadeComplementarHoras = CategoriaAtividadeComplementarEnum.VivenciasDeGestao
                 };
                 atividade.comprovante = arquivo;
                 atividade.nomeArquivo = nomeArquivo;
