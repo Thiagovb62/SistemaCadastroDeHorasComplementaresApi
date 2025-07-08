@@ -53,14 +53,14 @@ public class AtividadeUsuarioService:  IAtividadeUsuarioService
             
     }
 
-    public void AddAsync(ReqAtividadeUsuarioDTO dto, int matricula, IFormFile comprovante)
+    public void AddAsync(ReqAtividadeUsuarioDTO dto, int matricula)
     {
         AtividadeFactory atividadeFactory =  new ConcreteAtividadeFactory( 
             _usuarioRepository,
             _comprovanteService,
             _atividadeUsuarioRepositoryRepository
         );
-        atividadeFactory.CriarAtividade(dto, matricula, comprovante);
+        atividadeFactory.CriarAtividade(dto, matricula);
         
     }
     public void IntegralizarHoras(Guid atividadeId)

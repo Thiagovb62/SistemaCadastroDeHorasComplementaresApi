@@ -18,7 +18,7 @@ public class AddAtividadeCommandHandler : IRequestHandler<AddAtividadeCommand>
     // A lógica de negócio agora vive aqui
     public async Task Handle(AddAtividadeCommand request, CancellationToken cancellationToken)
     {
-        _atividadeUsuarioService.AddAsync(request.Dto, request.Matricula, request.Comprovante);
+        _atividadeUsuarioService.AddAsync(request.Dto, request.Matricula);
         
         // Como o método original não era async, retornamos Task.CompletedTask
         await Task.CompletedTask;
