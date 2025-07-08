@@ -34,9 +34,9 @@ public  class IntegralizacaoHorasFactory
         {
             throw new KeyNotFoundException($"Usuário associado à atividade {atividadeId} não encontrado.");
         }
-        switch (atividade.tipoAtividadeComplementarHoras)
+        switch (atividade.categoriaAtividadeComplementarHoras)
         {
-            case TipoAtividadeComplementarHorasEnum.ParticipacaoOrganizacaoEventos:
+            case CategoriaAtividadeComplementarEnum.ParticipacaoOrganizacaoEventos:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.horasRestantesDeParticipacaoOuOrganizacaoDeEventos > 0)
@@ -63,7 +63,7 @@ public  class IntegralizacaoHorasFactory
                 }
 
                 break;
-            case TipoAtividadeComplementarHorasEnum.IniciacaoDocenciaPesquisaExtensao:
+            case CategoriaAtividadeComplementarEnum.IniciacaoDocenciaPesquisaExtensao:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.HorasTotaisDeIniciacaoADocenciaOuVivenciaOuExtensão > 0)
@@ -90,7 +90,7 @@ public  class IntegralizacaoHorasFactory
                 }
 
                 break;
-            case TipoAtividadeComplementarHorasEnum.AtividadesArtisticoCulturaisEsportivas:
+            case CategoriaAtividadeComplementarEnum.AtividadesArtisticoCulturaisEsportivas:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.horasRestantesDeAtividadesArtisticoCulturaisEEsportivas > 0)
@@ -119,7 +119,7 @@ public  class IntegralizacaoHorasFactory
                 }
 
                 break;
-            case TipoAtividadeComplementarHorasEnum.ExperienciasProfissionais:
+            case CategoriaAtividadeComplementarEnum.ExperienciasProfissionais:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.horasRestantesDeExperienciasLigadasAFormacaoProfissional > 0)
@@ -148,7 +148,7 @@ public  class IntegralizacaoHorasFactory
                 }
 
                 break;
-            case TipoAtividadeComplementarHorasEnum.OutrasAtividades:
+            case CategoriaAtividadeComplementarEnum.OutrasAtividades:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.horasRestantesDeOutrasAtividades > 0)
@@ -175,7 +175,7 @@ public  class IntegralizacaoHorasFactory
                 }
 
                 break;
-            case TipoAtividadeComplementarHorasEnum.VivenciasDeGestao:
+            case CategoriaAtividadeComplementarEnum.VivenciasDeGestao:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.horasRestantesDeVivenciasDeGestao > 0)

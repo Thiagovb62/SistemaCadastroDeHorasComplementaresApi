@@ -48,7 +48,7 @@ public class AtividadesRepository : IAtividadesRepository
                 isExecUfc = a.isExecUfc,
                 cargaHoraria = a.cargaHoraria,
                 qtdHorasUtilizadas = a.qtdHorasUtilizadas,
-                tipoAtividadeComplementarHoras = a.tipoAtividadeComplementarHoras,
+                categoriaAtividadeComplementarHoras = a.categoriaAtividadeComplementarHoras,
                 nomeArquivo = a.nomeArquivo,
                 tipoArquivo = a.tipoArquivo
             })
