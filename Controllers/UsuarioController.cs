@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SistemaCadastroDeHorasApi.Services;
 using SistemaCadastroDeHorasApi.Models.DTO;
+using Microsoft.AspNetCore.HttpLogging;
 
 namespace SistemaCadastroDeHorasApi.Controllers;
 
@@ -58,5 +59,17 @@ public class UsuarioController : ControllerBase
         if (!deleted) return NotFound("Usuário não encontrado.");
 
         return NoContent();
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] ReqLoginUserDTO userLoginDTO)
+    {
+        var user = await _usuarioService.GetByMatriculaAsync(userLoginDTO.Matricula);
+        if (user == null) return Unauthorized("Usuário não encontrado");
+
+        var passwordHashed = _usuarioService.HashPassword(userLoginDTO.Senha);
+        if (user.Senha != passwordHashed) return Unauthorized("Senha incorreta. Tente novamente.");
+
+        return Ok(new { user.Nome, user.Matricula });
     }
 }
