@@ -45,6 +45,8 @@ public class AtividadeUsuarioService : IAtividadeUsuarioService
                 a.Id,
                 a.dataInicio,
                 a.dataFim,
+                a.dataSubmissao,
+                a.status.ToString(),
                 a.TipoAtividade.nome.ToString(),
                 a.TipoParticipacao.nome.ToString(),
                 a.pais,
@@ -210,6 +212,22 @@ public class AtividadeUsuarioService : IAtividadeUsuarioService
     public Task DeleteByAtividadeIdAsync(Guid id)
     {
         return _atividadesRepository.DeleteAsync(id);
+    }
+
+    public Task<IEnumerable<ResAtividadeSimplificadaDTO>> GetAllByUserMatriculaSimplifiedAsync(int matricula)
+    {
+        var atividades = _atividadesRepository.GetAllByUserMatriculaAsync(matricula).Result;
+
+        var result = atividades.Select(a => new ResAtividadeSimplificadaDTO(
+            a.Id,
+            a.dataSubmissao,
+            a.TipoAtividade.nome.ToString(),
+            a.titulo,
+            a.qtdHorasUtilizadas,
+            a.status.ToString()
+            ));
+       
+        return Task.FromResult(result);
     }
 }
 

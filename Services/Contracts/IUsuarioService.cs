@@ -12,5 +12,6 @@ public interface IUsuarioService
     Task<string> CreateAsync(ReqUserDTO usuario);
     Task<Usuario> UpdateAsync(int id, ReqUpdateUserDTO usuario);
     Task<bool> DeleteAsync(int matricula);
+    string HashPassword(string password);
     Task<string> updateLimiteHorasAsync(int matricula, ReqUpdateLimiteHorasDTO dto);
 }

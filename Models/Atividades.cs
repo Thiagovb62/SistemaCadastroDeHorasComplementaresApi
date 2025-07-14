@@ -42,6 +42,10 @@ public class Atividades
     [Required] public DateTime dataInicio { get; set; }
 
     [Required] public DateTime dataFim { get; set; }
+    
+    [Required] public DateTime dataSubmissao { get; set; }
+
+    public StatusAtividadeEnum status { get; set; }
 
     [Required] public bool isExecUfc { get; set; }
 
@@ -54,7 +58,7 @@ public class Atividades
     [Required][StringLength(100)] public string nomeArquivo { get; set; }
 
     [Required][StringLength(50)] public string tipoArquivo { get; set; }
-    
+
     public CategoriaAtividadeComplementarEnum categoriaAtividadeComplementarHoras { get; set; }
     
 }

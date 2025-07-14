@@ -69,8 +69,19 @@ using Microsoft.AspNetCore.Mvc;
     
             return Ok(updatedUsuario);
         }
-    
-        
+      [EndpointSummary("Realiza o login do usuário.")]
+      [HttpPost("login")]
+      public async Task<IActionResult> Login([FromBody] ReqLoginUserDTO userLoginDTO)
+      {
+          var user = await _usuarioService.GetByMatriculaAsync(userLoginDTO.Matricula);
+          if (user == null) return Unauthorized("Usuário não encontrado");
+
+          var passwordHashed = _usuarioService.HashPassword(userLoginDTO.Senha);
+          if (user.Senha != passwordHashed) return Unauthorized("Senha incorreta. Tente novamente.");
+
+          return Ok(new { user.Nome, user.Matricula });
+      }
+
         [EndpointSummary("Deleta um usuário pelo matrícula")]
         [HttpDelete("{matricula}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

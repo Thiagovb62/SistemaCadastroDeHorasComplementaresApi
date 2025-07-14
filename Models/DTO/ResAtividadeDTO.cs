@@ -4,6 +4,8 @@ public record ResAtividadeDTO(
     Guid id,
     DateTime DataInicio,
     DateTime DataFim,
+    DateTime DataSubmissao,
+    string status,
     string TipoAtividade,
     string TipoParticipacao,
     string Pais,

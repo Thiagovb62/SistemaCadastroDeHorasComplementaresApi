@@ -18,5 +18,5 @@ public class AtividadeUsuario
     [Required]
     public Atividades Atividade { get; set; }
     
-    public StatusAtividadeEnum Status { get; set; }
+    //public StatusAtividadeEnum Status { get; set; }
 }
