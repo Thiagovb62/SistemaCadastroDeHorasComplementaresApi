@@ -45,6 +45,8 @@ public class AtividadesRepository : IAtividadesRepository
                 cnpj = a.cnpj,
                 dataInicio = a.dataInicio,
                 dataFim = a.dataFim,
+                dataSubmissao = a.dataSubmissao,
+                status = a.status,
                 isExecUfc = a.isExecUfc,
                 cargaHoraria = a.cargaHoraria,
                 qtdHorasUtilizadas = a.qtdHorasUtilizadas,
@@ -88,5 +90,19 @@ public class AtividadesRepository : IAtividadesRepository
         if (comprovante == null) throw new KeyNotFoundException("Não foi possivel encontrar o comprovante da atividade.");
 
         return comprovante;
+    }
+
+    public Task<IEnumerable<Atividades>> GetByStatusAsync(string status)
+    {
+        if (string.IsNullOrEmpty(status))
+        {
+            throw new ArgumentException("Status não pode ser nulo ou vazio.", nameof(status));
+        }
+
+        var atividades = _context.Atividades
+            .Where(a => a.status.ToString().Equals(status, StringComparison.OrdinalIgnoreCase))
+            .AsEnumerable();
+
+        return Task.FromResult(atividades);
     }
 }

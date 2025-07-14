@@ -7,6 +7,7 @@ public interface IAtividadeUsuarioService
 {
 
     Task<IEnumerable<ResAtividadeUsario>> GetAllByUserMatriculaAsync(int matriucla);
+    Task<IEnumerable<ResAtividadeSimplificadaDTO>> GetAllByUserMatriculaSimplifiedAsync(int matricula);
     void AddAsync(ReqAtividadeUsuarioDTO dto, int matricula, IFormFile comprovante);
     void IntegralizarHoras(Guid atividadeId);
     Task<string> UpdateAsync(ReqUpdateAtividadeDTO dto, Guid atividadeId);

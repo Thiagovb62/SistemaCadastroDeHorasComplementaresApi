@@ -78,5 +78,11 @@ public class AtividadeUsuarioController : ControllerBase
 
         return File(comprovante, "application/pdf", "comprovante.pdf");
     }
-    
+    [HttpGet("atividade/simplificada/all/{matricula}")]
+    public async Task<IActionResult> GetAllSimplified([FromRoute] int matricula)
+    {
+        var atividadesSimplified = await _atividadeUsuarioService.GetAllByUserMatriculaSimplifiedAsync(matricula);
+        return Ok(atividadesSimplified);
+    }
+
 }

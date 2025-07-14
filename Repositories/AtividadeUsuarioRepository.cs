@@ -49,19 +49,6 @@ public class AtividadeUsuarioRepository : IAtividadeUsuarioRepository
         return Task.FromResult(atividades);
     }
 
-    public Task<IEnumerable<AtividadeUsuario>> GetByStatusAsync(string status)
-    {
-        if (string.IsNullOrEmpty(status))
-        {
-            throw new ArgumentException("Status não pode ser nulo ou vazio.", nameof(status));
-        }
-
-        var atividades = _context.AtividadeUsuarios
-            .Where(a => a.Status.ToString().Equals(status, StringComparison.OrdinalIgnoreCase))
-            .AsEnumerable();
-
-        return Task.FromResult(atividades);
-    }
 
     public Task AddAsync(Atividades atividade,int matricula)
     {
@@ -78,8 +65,7 @@ public class AtividadeUsuarioRepository : IAtividadeUsuarioRepository
         {
             Id = Guid.NewGuid(),
             Usuario = usuario,
-            Atividade = atividade,
-            Status = StatusAtividadeEnum.PENDENTE 
+            Atividade = atividade 
         };
 
         _context.AtividadeUsuarios.Add(atividadeUsuario);
