@@ -2,6 +2,7 @@ using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SistemaCadastroDeHorasApi.Context;
+using SistemaCadastroDeHorasApi.Exception;
 using SistemaCadastroDeHorasApi.Migrations;
 using SistemaCadastroDeHorasApi.Repositories;
 using SistemaCadastroDeHorasApi.Repositories.Contracts;
@@ -48,7 +49,7 @@ if (builder.Environment.IsDevelopment())
 }
 
 var app = builder.Build();
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

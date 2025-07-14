@@ -8,6 +8,7 @@ Este é um projeto em **C#** que implementa uma API para cadastro de horas utili
 - **ASP.NET Core**
 - **Entity Framework Core**
 - **PostgreSQL**
+- **Swagger**
 - **Docker** e **Docker Compose**
 
 ## Estrutura do Projeto

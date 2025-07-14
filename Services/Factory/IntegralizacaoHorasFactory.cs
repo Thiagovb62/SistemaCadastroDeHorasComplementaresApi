@@ -34,9 +34,9 @@ public  class IntegralizacaoHorasFactory
         {
             throw new KeyNotFoundException($"Usuário associado à atividade {atividadeId} não encontrado.");
         }
-        switch (atividade.tipoAtividadeComplementarHoras)
+        switch (atividade.categoriaAtividadeComplementarHoras)
         {
-            case TipoAtividadeComplementarHorasEnum.ParticipacaoOrganizacaoEventos:
+            case CategoriaAtividadeComplementarEnum.ParticipacaoOrganizacaoEventos:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.horasRestantesDeParticipacaoOuOrganizacaoDeEventos > 0)
@@ -49,21 +49,21 @@ public  class IntegralizacaoHorasFactory
                         }
                         else
                         {
-                            throw new Exception("nao e possivel adiconar horas alem do total.");
+                            throw new BadHttpRequestException("nao e possivel adiconar horas alem do total.");
                         }
                     }
                     else
                     {
-                        throw new Exception("Horas de participação ou organização de eventos ja batidas.");
+                        throw new BadHttpRequestException("Horas de participação ou organização de eventos ja batidas.");
                     }
                 }
                 else
                 {
-                    throw new Exception("Horas restantes totais ja batidas.");
+                    throw new BadHttpRequestException("Horas restantes totais ja batidas.");
                 }
 
                 break;
-            case TipoAtividadeComplementarHorasEnum.IniciacaoDocenciaPesquisaExtensao:
+            case CategoriaAtividadeComplementarEnum.IniciacaoDocenciaPesquisaExtensao:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.HorasTotaisDeIniciacaoADocenciaOuVivenciaOuExtensão > 0)
@@ -76,21 +76,21 @@ public  class IntegralizacaoHorasFactory
                         }
                         else
                         {
-                            throw new Exception("nao e possivel adiconar horas alem do total.");
+                            throw new BadHttpRequestException("nao e possivel adiconar horas alem do total.");
                         }
                     }
                     else
                     {
-                        throw new Exception("Horas de iniciação, docência, pesquisa ou extensão ja batidas.");
+                        throw new BadHttpRequestException("Horas de iniciação, docência, pesquisa ou extensão ja batidas.");
                     }
                 }
                 else
                 {
-                    throw new Exception("Horas totais ja batidas.");
+                    throw new BadHttpRequestException("Horas totais ja batidas.");
                 }
 
                 break;
-            case TipoAtividadeComplementarHorasEnum.AtividadesArtisticoCulturaisEsportivas:
+            case CategoriaAtividadeComplementarEnum.AtividadesArtisticoCulturaisEsportivas:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.horasRestantesDeAtividadesArtisticoCulturaisEEsportivas > 0)
@@ -105,21 +105,21 @@ public  class IntegralizacaoHorasFactory
                         }
                         else
                         {
-                            throw new Exception("nao e possivel adiconar horas alem do total.");
+                            throw new BadHttpRequestException("nao e possivel adiconar horas alem do total.");
                         }
                     }
                     else
                     {
-                        throw new Exception("Horas de atividades artistico culturais ou esportivas ja batidas.");
+                        throw new BadHttpRequestException("Horas de atividades artistico culturais ou esportivas ja batidas.");
                     }
                 }
                 else
                 {
-                    throw new Exception("Horas totais ja batidas.");
+                    throw new BadHttpRequestException("Horas totais ja batidas.");
                 }
 
                 break;
-            case TipoAtividadeComplementarHorasEnum.ExperienciasProfissionais:
+            case CategoriaAtividadeComplementarEnum.ExperienciasProfissionais:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.horasRestantesDeExperienciasLigadasAFormacaoProfissional > 0)
@@ -134,21 +134,21 @@ public  class IntegralizacaoHorasFactory
                         }
                         else
                         {
-                            throw new Exception("nao e possivel adiconar horas alem do total.");
+                            throw new BadHttpRequestException("nao e possivel adiconar horas alem do total.");
                         }
                     }
                     else
                     {
-                        throw new Exception("Horas de experiências profissionais ja batidas.");
+                        throw new BadHttpRequestException("Horas de experiências profissionais ja batidas.");
                     }
                 }
                 else
                 {
-                    throw new Exception("Horas totais ja batidas.");
+                    throw new BadHttpRequestException("Horas totais ja batidas.");
                 }
 
                 break;
-            case TipoAtividadeComplementarHorasEnum.OutrasAtividades:
+            case CategoriaAtividadeComplementarEnum.OutrasAtividades:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.horasRestantesDeOutrasAtividades > 0)
@@ -161,21 +161,21 @@ public  class IntegralizacaoHorasFactory
                         }
                         else
                         {
-                            throw new Exception("nao e possivel adiconar horas alem do total.");
+                            throw new BadHttpRequestException("nao e possivel adiconar horas alem do total.");
                         }
                     }
                     else
                     {
-                        throw new Exception("Horas de outras atividades ja batidas.");
+                        throw new BadHttpRequestException("Horas de outras atividades ja batidas.");
                     }
                 }
                 else
                 {
-                    throw new Exception("Horas totais ja batidas.");
+                    throw new BadHttpRequestException("Horas totais ja batidas.");
                 }
 
                 break;
-            case TipoAtividadeComplementarHorasEnum.VivenciasDeGestao:
+            case CategoriaAtividadeComplementarEnum.VivenciasDeGestao:
                 if (usuario.horasRestantesTotais > 0)
                 {
                     if (usuario.horasRestantesDeVivenciasDeGestao > 0)
@@ -188,22 +188,22 @@ public  class IntegralizacaoHorasFactory
                         }
                         else
                         {
-                            throw new Exception("nao e possivel adiconar horas alem do total.");
+                            throw new BadHttpRequestException("nao e possivel adiconar horas alem do total.");
                         }
                     }
                     else
                     {
-                        throw new Exception("Horas de vivências de gestão ja batidas.");
+                        throw new BadHttpRequestException("Horas de vivências de gestão ja batidas.");
                     }
                 }
                 else
                 {
-                    throw new Exception("Horas totais ja batidas.");
+                    throw new BadHttpRequestException("Horas totais ja batidas.");
                 }
 
                 break;
             default:
-                throw new Exception("Tipo de atividade complementar não reconhecido.");
+                throw new BadHttpRequestException("Tipo de atividade complementar não reconhecido.");
         }
     }
 }

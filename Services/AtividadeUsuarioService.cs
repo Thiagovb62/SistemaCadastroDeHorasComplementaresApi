@@ -25,15 +25,15 @@ public class AtividadeUsuarioService : IAtividadeUsuarioService
         _comprovanteService = comprovanteAuxiliary;
     }
     
-    public TipoAtividadeComplementarHorasEnum? ObterTipoAtividadePorNome(int  codigo)
+    public CategoriaAtividadeComplementarEnum? ObterTipoAtividadePorNome(int  codigo)
     {
-        return TipoAtividadeComplementarHorasEnumExtensions.FromCode(codigo);
+        return CategoriaAtividadeComplementarEnumExtensions.FromCode(codigo);
     }
  
     public Task<IEnumerable<ResAtividadeUsario>> GetAllByUserMatriculaAsync(int matricula)
     {
-        var atividades = _atividadesRepository.GetAllByUserMatriculaAsync(matricula).Result;
         var user = _usuarioRepository.GetByMatriculaAsync(matricula).Result;
+        var atividades = _atividadesRepository.GetAllByUserMatriculaAsync(matricula).Result;
 
         return Task.FromResult(atividades.Select(a => new ResAtividadeUsario(
             new ResUserDTO(
@@ -65,7 +65,7 @@ public class AtividadeUsuarioService : IAtividadeUsuarioService
         var atividades = _atividadesRepository.GetAllByUserMatriculaAsync(matricula).Result;
         var tipoAtividade = ObterTipoAtividadePorNome(codigo);
         var qtdHorasUtilizadas = 0;
-        var atividade = atividades.FirstOrDefault(a => a.tipoAtividadeComplementarHoras == tipoAtividade);
+        var atividade = atividades.FirstOrDefault(a => a.categoriaAtividadeComplementarHoras == tipoAtividade);
         if (atividade != null)
         {
             qtdHorasUtilizadas = atividade.qtdHorasUtilizadas;
@@ -83,7 +83,7 @@ public class AtividadeUsuarioService : IAtividadeUsuarioService
         }
         
         var listaDetalhesHoras = new List<ResHoraDetailsDTO>();
-        var nomesCategorias = Enum.GetNames(typeof(TipoAtividadeComplementarHorasEnum));
+        var nomesCategorias = Enum.GetNames(typeof(CategoriaAtividadeComplementarEnum));
 
 
         for (int i = 0; i < nomesCategorias.Length; i++)
@@ -111,28 +111,28 @@ public class AtividadeUsuarioService : IAtividadeUsuarioService
 
     private (int horasTotais, int horasRestantes) GetHorasFromUsuarioPorCategoria(Usuario usuario, string nomeCategoria)
     {
-        if (Enum.TryParse<TipoAtividadeComplementarHorasEnum>(nomeCategoria, out var categoriaEnum))
+        if (Enum.TryParse<CategoriaAtividadeComplementarEnum>(nomeCategoria, out var categoriaEnum))
         {
             switch (categoriaEnum)
             {
-                case TipoAtividadeComplementarHorasEnum.IniciacaoDocenciaPesquisaExtensao:
+                case CategoriaAtividadeComplementarEnum.IniciacaoDocenciaPesquisaExtensao:
                     return (usuario.HorasTotaisDeIniciacaoADocenciaOuVivenciaOuExtensão,
                         usuario.horasRestantesDeIniciacaoADocenciaOuVivenciaOuExtensão);
-                case TipoAtividadeComplementarHorasEnum.AtividadesArtisticoCulturaisEsportivas:
+                case CategoriaAtividadeComplementarEnum.AtividadesArtisticoCulturaisEsportivas:
                     return (usuario.HorasTotaisDeAtividadesArtisticoCulturaisEEsportivas,
                         usuario.horasRestantesDeAtividadesArtisticoCulturaisEEsportivas);
-                case TipoAtividadeComplementarHorasEnum.ParticipacaoOrganizacaoEventos:
+                case CategoriaAtividadeComplementarEnum.ParticipacaoOrganizacaoEventos:
                     return (usuario.HorasTotaisDeParticipacaoOuOrganizacaoDeEventos,
                         usuario.horasRestantesDeParticipacaoOuOrganizacaoDeEventos);
-                case TipoAtividadeComplementarHorasEnum.ExperienciasProfissionais:
+                case CategoriaAtividadeComplementarEnum.ExperienciasProfissionais:
                     return (usuario.HorasTotaisDeExperienciasLigadasAFormacaoProfissional,
                         usuario.horasRestantesDeExperienciasLigadasAFormacaoProfissional);
-                case TipoAtividadeComplementarHorasEnum.ProducaoTecnicaCientifica:
+                case CategoriaAtividadeComplementarEnum.ProducaoTecnicaCientifica:
                     return (usuario.HorasTotaisDeProducaoTecnicaOuCientifica,
                         usuario.horasRestantesDeProducaoTecnicaOuCientifica);
-                case TipoAtividadeComplementarHorasEnum.VivenciasDeGestao:
+                case CategoriaAtividadeComplementarEnum.VivenciasDeGestao:
                     return (usuario.HorasTotaisDeVivenciasDeGestao, usuario.horasRestantesDeVivenciasDeGestao);
-                case TipoAtividadeComplementarHorasEnum.OutrasAtividades:
+                case CategoriaAtividadeComplementarEnum.OutrasAtividades:
                     return (usuario.HorasTotaisDeOutrasAtividades, usuario.horasRestantesDeOutrasAtividades);
                 default:
                     return (0, 0);

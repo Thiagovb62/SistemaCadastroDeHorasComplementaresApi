@@ -13,5 +13,6 @@ public record ReqUserDTO(
     [Required(ErrorMessage = "A senha é obrigatória")]
     string Senha,
     [Required(ErrorMessage = "O semestre de ingresso é obrigatório")]
+    [Range(2000, 2026, ErrorMessage = "O semestre de ingresso deve estar entre os anos 2000 e 2026")]
     int SemestreDeIngresso
 );

@@ -41,14 +41,6 @@ public class AtividadeUsuarioController : ControllerBase
         var horasDetails = await _atividadeUsuarioService.GetHorasDeatailsByMatricula(matricula);
         return Ok(horasDetails);
     }
-    
-    [HttpGet("atividade/tipo")]
-    public async Task<IActionResult> GetTipoAtividadeComplementar([FromQuery] int matricula, [FromQuery] int codigo)
-    {
-        var tipoAtividade =  _atividadeUsuarioService.GetTipoAtividadeComplementarByIdAsync(matricula, codigo);
-        return Ok(tipoAtividade);
-    }
-
 
     [HttpPost("add/atividade/{matricula}")]
     [Consumes("multipart/form-data")]

@@ -55,6 +55,6 @@ public class Atividades
 
     [Required][StringLength(50)] public string tipoArquivo { get; set; }
     
-    public TipoAtividadeComplementarHorasEnum  tipoAtividadeComplementarHoras { get; set; }
+    public CategoriaAtividadeComplementarEnum categoriaAtividadeComplementarHoras { get; set; }
     
 }
