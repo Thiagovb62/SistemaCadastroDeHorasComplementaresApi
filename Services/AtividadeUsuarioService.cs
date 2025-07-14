@@ -32,8 +32,8 @@ public class AtividadeUsuarioService : IAtividadeUsuarioService
  
     public Task<IEnumerable<ResAtividadeUsario>> GetAllByUserMatriculaAsync(int matricula)
     {
-        var atividades = _atividadesRepository.GetAllByUserMatriculaAsync(matricula).Result;
         var user = _usuarioRepository.GetByMatriculaAsync(matricula).Result;
+        var atividades = _atividadesRepository.GetAllByUserMatriculaAsync(matricula).Result;
 
         return Task.FromResult(atividades.Select(a => new ResAtividadeUsario(
             new ResUserDTO(

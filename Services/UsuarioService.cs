@@ -44,14 +44,30 @@ public class UsuarioService : IUsuarioService
     {
         
         await _usuarioRepository.GetByMatriculaToCreateUserAsync(usuario.Matricula);
-      
-            Usuario newUsuario = new Usuario
-            {
-                Nome = usuario.Nome,
-                Matricula = usuario.Matricula,
-                Senha = HashPassword(usuario.Senha),
-                SemestreDeIngresso = usuario.SemestreDeIngresso
-            };
+        
+        Usuario newUsuario = new Usuario
+        {
+            Nome = usuario.Nome,
+            Matricula = usuario.Matricula,
+            Senha = HashPassword(usuario.Senha),
+            SemestreDeIngresso = usuario.SemestreDeIngresso,
+            HorasTotais = 288,
+            HorasTotaisDeIniciacaoADocenciaOuVivenciaOuExtensão = 96,
+            HorasTotaisDeParticipacaoOuOrganizacaoDeEventos = 32,
+            HorasTotaisDeAtividadesArtisticoCulturaisEEsportivas = 80,
+            HorasTotaisDeExperienciasLigadasAFormacaoProfissional = 64,
+            HorasTotaisDeProducaoTecnicaOuCientifica = 96,
+            HorasTotaisDeVivenciasDeGestao = 48,
+            HorasTotaisDeOutrasAtividades = 48,
+            horasRestantesTotais = 288,
+            horasRestantesDeIniciacaoADocenciaOuVivenciaOuExtensão = 96,
+            horasRestantesDeParticipacaoOuOrganizacaoDeEventos = 32,
+            horasRestantesDeAtividadesArtisticoCulturaisEEsportivas = 80,
+            horasRestantesDeExperienciasLigadasAFormacaoProfissional = 64,
+            horasRestantesDeProducaoTecnicaOuCientifica = 96,
+            horasRestantesDeVivenciasDeGestao = 48,
+            horasRestantesDeOutrasAtividades = 48
+        };
 
         await _usuarioRepository.AddAsync(newUsuario);
         
@@ -71,10 +87,42 @@ public class UsuarioService : IUsuarioService
         return await _usuarioRepository.UpdateAsync(existingUsuario);
     }
 
+    public async Task<string> updateLimiteHorasAsync(int matricula, ReqUpdateLimiteHorasDTO dto)
+    {
+        var existingUsuario = await _usuarioRepository.GetByMatriculaAsync(matricula);
+        if (existingUsuario == null) throw new BadHttpRequestException("Usuário não encontrado.");
+         
+        var existingAtividadeUsuarios = await _atividadeUsuarioService.GetAllByUserMatriculaAsync(existingUsuario.Matricula);
+        
+        if (existingAtividadeUsuarios.Any())
+        {
+            throw new BadHttpRequestException("Usuário não pode alterar as horas restantes, pois possui atividades ja associadas.");
+        }
+        
+        existingUsuario.HorasTotaisDeIniciacaoADocenciaOuVivenciaOuExtensão = dto.HorasTotaisDeIniciacaoADocenciaOuVivenciaOuExtensão;
+        existingUsuario.HorasTotaisDeParticipacaoOuOrganizacaoDeEventos = dto.HorasTotaisDeParticipacaoOuOrganizacaoDeEventos;
+        existingUsuario.HorasTotaisDeAtividadesArtisticoCulturaisEEsportivas = dto.HorasTotaisDeAtividadesArtisticoCulturaisEEsportivas;
+        existingUsuario.HorasTotaisDeExperienciasLigadasAFormacaoProfissional = dto.HorasTotaisDeExperienciasLigadasAFormacaoProfissional;
+        existingUsuario.HorasTotaisDeProducaoTecnicaOuCientifica = dto.HorasTotaisDeProducaoTecnicaOuCientifica;
+        existingUsuario.HorasTotaisDeVivenciasDeGestao = dto.HorasTotaisDeVivenciasDeGestao;
+        existingUsuario.HorasTotaisDeOutrasAtividades = dto.HorasTotaisDeOutrasAtividades;
+        existingUsuario.HorasTotais = dto.HorasTotaisDeIniciacaoADocenciaOuVivenciaOuExtensão +
+                                                dto.HorasTotaisDeParticipacaoOuOrganizacaoDeEventos +
+                                                dto.HorasTotaisDeAtividadesArtisticoCulturaisEEsportivas +
+                                                dto.HorasTotaisDeExperienciasLigadasAFormacaoProfissional +
+                                                dto.HorasTotaisDeProducaoTecnicaOuCientifica +
+                                                dto.HorasTotaisDeVivenciasDeGestao +
+                                                dto.HorasTotaisDeOutrasAtividades;
+        
+        await _usuarioRepository.UpdateAsync(existingUsuario);
+        return "Limite de horas atualizado com sucesso.";
+        
+    }
+    
     public async Task<bool> DeleteAsync(int Matricula)
     {
         var existingUsuario = await _usuarioRepository.GetByMatriculaAsync(Matricula);
-        if (existingUsuario == null) throw new BadHttpRequestException("Usuário não encontrado.");
+        if (existingUsuario == null) throw new KeyNotFoundException("Usuário não encontrado.");
         
         var existingAtividadeUsuarios = await _atividadeUsuarioService.GetAllByUserMatriculaAsync(existingUsuario.Matricula);
         
@@ -85,5 +133,8 @@ public class UsuarioService : IUsuarioService
         
         return await _usuarioRepository.DeleteAsync(existingUsuario.Id);
     }
+    
+    
+    
    
 }
