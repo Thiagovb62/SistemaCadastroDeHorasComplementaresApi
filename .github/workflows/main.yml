@@ -1,47 +1,55 @@
-name: Build and Merge to Master
+name: Build, Test and Merge
 
-
+# Aciona o workflow em pushes para a branch 'Develop'
+# E em pull requests direcionados para a branch 'master'
 on:
   push:
     branches: [ "Develop" ]
-    
+  pull_request:
+    branches: [ "master" ]
+
 jobs:
   build-and-merge:
     runs-on: ubuntu-latest
 
-  
+    # Permissão para escrever no repositório (necessária para o merge)
     permissions:
       contents: write
 
     steps:
-   
+    # 1. Faz o checkout do código
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-     
+        # Busca todo o histórico para que o merge possa ser feito
         fetch-depth: 0
 
+    # 2. Configura o ambiente .NET
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9.0.x'
 
- 
+    # 3. Restaura as dependências
     - name: Restore dependencies
       run: dotnet restore
 
-
+    # 4. Compila o projeto
     - name: Build
       run: dotnet build --no-restore
 
+    # --- Os passos a seguir só executam em um push para a branch 'Develop' ---
 
+    # 5. Configura o Git para o commit de merge
     - name: Configure Git
+      if: github.event_name == 'push' && github.ref == 'refs/heads/Develop'
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-
+    # 6. Faz o merge da 'Develop' na 'master' e envia para o repositório
     - name: Merge Develop into Master
+      if: github.event_name == 'push' && github.ref == 'refs/heads/Develop'
       run: |
         git fetch --all
         git checkout master
